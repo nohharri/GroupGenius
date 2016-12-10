@@ -7,8 +7,12 @@ angular.module('myApp', [
     'ui.bootstrap',
     'myApp.lib.services',
     'myApp.directives.myDirective',
-    'myApp.controllers.home',
     'myApp.controllers.user',
+    'myApp.controllers.landing',
+    'myApp.controllers.newgroup',
+    'myApp.controllers.signup',
+    'myApp.controllers.public',
+    'myApp.controllers.private'
 ])
 
 .config(['$routeProvider', function($routeProvider) {
