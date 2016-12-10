@@ -6,7 +6,7 @@ angular.module('myApp.controllers.private', [])
 .controller('PrivateCtrl', function($scope, $rootScope, firebaseData) {
     $scope.isCollapsed = true;
     var firepadRef = firebaseData.database().ref();
-    var codeMirror = CodeMirror(document.getElementById('document-wrapper'), { lineWrapping: true });
+    var codeMirror = CodeMirror(document.getElementById('wrapper-document'), { lineWrapping: true });
     var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
         richTextShortcuts: true,
         richTextToolbar: true,
