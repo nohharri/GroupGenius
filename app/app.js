@@ -51,7 +51,7 @@ angular.module('myApp', [
 
 
     $routeProvider.otherwise({
-        redirectTo: '/home'
+        redirectTo: '/landing'
     });
 
 }])
