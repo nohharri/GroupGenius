@@ -25,3 +25,17 @@ angular.module('myApp.lib.services', [])
     }
 })
 
+// Handles the shared header service between
+// separate url routes
+.factory('headerService', function($q) {
+    var something = "something";
+
+    return {
+        set: function(set) {
+            something = set;
+        }
+        get: function() {
+            return something;
+        }
+    }
+})
