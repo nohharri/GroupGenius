@@ -8,15 +8,43 @@ angular.module('myApp', [
     'myApp.lib.services',
     'myApp.directives.myDirective',
     'myApp.controllers.home',
+    'myApp.controllers.user',
 ])
 
 .config(['$routeProvider', function($routeProvider) {
 
-    $routeProvider.when('/home', {
-        title: 'Home',
-        templateUrl: 'templates/home.html',
-        controller: 'HomeCtrl'
+    $routeProvider.when('/landing', {
+        title: 'Landing',
+        templateUrl: 'templates/landing.html',
+        controller: 'LandingCtrl'
     });
+    $routeProvider.when('/newgroup', {
+        title: 'NewGroup',
+        templateUrl: 'templates/newgroup.html',
+        controller: 'NewGroupCtrl'
+    });
+    $routeProvider.when('/private', {
+        title: 'Private',
+        templateUrl: 'templates/private.html',
+        controller: 'PrivateCtrl'
+    });
+    $routeProvider.when('/public', {
+        title: 'Public',
+        templateUrl: 'templates/public.html',
+        controller: 'PublicCtrl'
+    });
+    $routeProvider.when('/signup', {
+        title: 'SignUp',
+        templateUrl: 'templates/signup.html',
+        controller: 'SignUpCtrl'
+    });
+    $routeProvider.when('/user', {
+        title: 'User',
+        templateUrl: 'templates/user.html',
+        controller: 'UserCtrl'
+    });
+
+
 
     $routeProvider.otherwise({
         redirectTo: '/home'
