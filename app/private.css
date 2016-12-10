@@ -15,7 +15,7 @@
 
 .private #wrapper-document
 {
-    height: 100%;
+    height: 500px;
 }
 
-.powered-by-firepad {display:none;} /* remove firepad logo */
+a.powered-by-firepad {display:none;} /* remove firepad logo */
