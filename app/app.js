@@ -7,7 +7,11 @@ angular.module('myApp', [
     'ui.bootstrap',
     'myApp.lib.services',
     'myApp.directives.myDirective',
-    'myApp.controllers.home',
+    'myApp.controllers.landing',
+    'myApp.controllers.newgroup',
+    'myApp.controllers.private',
+    'myApp.controllers.public',
+    'myApp.controllers.signup',
     'myApp.controllers.user',
 ])
 
