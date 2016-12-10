@@ -33,7 +33,7 @@ angular.module('myApp.lib.services', [])
     return {
         set: function(set) {
             something = set;
-        }
+        },
         get: function() {
             return something;
         }
