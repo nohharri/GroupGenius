@@ -1,0 +1,21 @@
+.private #wrapper-private
+{
+    height: 100%;
+}
+
+.private #group-info
+{
+    height: 200px;
+}
+
+.private #wrapper-content
+{
+    height: calc(100% - 200px);
+}
+
+.private #wrapper-document
+{
+    height: 100%;
+}
+
+.powered-by-firepad {display:none;} /* remove firepad logo */
