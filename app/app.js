@@ -56,6 +56,10 @@ angular.module('myApp', [
 
 }])
 
+.controller('appCtrl', function($scope, $rootScope, firebaseData, headerService) {
+    $scope.shadow  = headerService.get();
+})
+
 .run(['$rootScope', function($rootScope) {
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
         try{
