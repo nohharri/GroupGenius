@@ -18,10 +18,12 @@ angular.module('myApp.lib.services', [])
         database: function() {
             return firebase.database();
         },
-        storage: function () {
+        storage: function() {
             return firebase.storage();
         },
-
+        provider: function() {
+            return firebase.auth();
+        }
     }
 })
 
