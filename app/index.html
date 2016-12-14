@@ -15,7 +15,8 @@
     <link rel="stylesheet" href="private.css">
 
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="style/css/main.css">
 
     <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 
@@ -25,9 +26,8 @@
 
 </head>
 <body>
-    <ng-include src="templates/header.html" ng-controller="appCtrl"></ng-include>
-    <div ng-view>
-    </div>
+    <ng-include src="'templates/header.html'" ng-controller="appCtrl"></ng-include>
+    <div ng-view></div>
 
     <!-- Angular Production Cdn -->
     <script src="bower_components/angular/angular.js"></script>

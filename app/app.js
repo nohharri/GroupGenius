@@ -48,16 +48,15 @@ angular.module('myApp', [
         controller: 'UserCtrl'
     });
 
-
-
     $routeProvider.otherwise({
         redirectTo: '/landing'
     });
 
 }])
 
+// Global app controller
 .controller('appCtrl', function($scope, $rootScope, firebaseData, headerService) {
-    $scope.shadow  = headerService.get();
+    $scope.isAuthenticated = true;
 })
 
 .run(['$rootScope', function($rootScope) {

@@ -28,14 +28,14 @@ angular.module('myApp.lib.services', [])
 // Handles the shared header service between
 // separate url routes
 .factory('headerService', function($q) {
-    var something = "something";
+    var isAuthenticated = false;
 
     return {
-        set: function(set) {
-            something = set;
+        setAuthenticated: function(_isAuthenticated) {
+            isAuthenticated = _isAuthenticated;
         },
-        get: function() {
-            return something;
+        getAuthenticated: function() {
+            return isAuthenticated;
         }
     }
 })
