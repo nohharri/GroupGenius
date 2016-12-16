@@ -3,5 +3,16 @@
 		<a href="#/landing">
 			<img src="static/img/logo_long_white_100x373.png" height=100%/>
 		</a>
+		<div class="header-profile">
+			<span ng-click="toggleProfileSettings()" class="profile-user clickable">
+				Lebron James 
+				<img style="border-radius: 50%;" src="http://gurucul.com/wp-content/uploads/2015/01/default-user-icon-profile.png" width=40px>
+			</span>
+			<div ng-if="showProfileSettings" class="profile-dropdown">
+				<div class="arrow-up"></div>
+				<div style="clear: both"></div>
+				<div ng-click="signOut()" class="profile-dropdown-elm clickable">Sign Out</div>
+			</div>
+		</div>
 	</div>
 </div>

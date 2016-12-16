@@ -1,18 +1,6 @@
 @import "variables";
 @import "globals";
 
-// Header
-.header {
-	width: 100%;
-	background-color: @blue-color;
-	position: relative;
-	padding: 15px 10px 15px 10px;
-}
-
-.header-content {
-	height: 40px;
-}
-
 // Common
 .box {
 	padding: 20px 20px 20px 20px;
@@ -33,6 +21,14 @@
 	cursor: pointer;
 }
 
+.arrow-up {
+  width: 0; 
+  height: 0; 
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent; 
+  border-bottom: 5px solid black;
+}
+
 // Bootstrap Override
 .btn-primary {
 	background-color: @blue-color;
@@ -41,6 +37,44 @@
 		background-color: darken(@blue-color, 10%);
 	}
 }
+
+// Header
+.header {
+	width: 100%;
+	background-color: @blue-color;
+	position: relative;
+	padding: 15px 10px 15px 10px;
+}
+
+.profile-user {
+	color: white;
+}
+
+.header-profile {
+	float: right;
+}
+
+.header-content {
+	height: 40px;
+}
+
+.profile-dropdown {
+	position: absolute;
+	width: 100px;
+	right: 10px;
+
+	.arrow-up {
+		float: right;
+		margin-right: 15px;
+		border-bottom: 5px solid @grey-color-lighter;
+	}
+}
+
+.profile-dropdown-elm {
+	padding: 10px;
+	background-color: @grey-color-lighter;
+}
+
 
 // Signup
 #signup input {
@@ -52,8 +86,8 @@
 }
 
 #signup .box {
-	padding-left: 40px;
-	padding-right: 40px;
+	padding-left: 60px;
+	padding-right: 60px;
 }
 
 #signup {

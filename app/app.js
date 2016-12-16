@@ -57,6 +57,21 @@ angular.module('myApp', [
 // Global app controller
 .controller('appCtrl', function($scope, $rootScope, firebaseData, headerService) {
     $scope.isAuthenticated = true;
+    $scope.showProfileSettings = false;
+
+    $scope.toggleProfileSettings = function() {
+        $scope.showProfileSettings = !$scope.showProfileSettings;
+    }
+
+    $scope.signOut = function() {
+        firebaseData.provider()
+            .signOut()
+            .then(function() {
+              console.log('Signed Out');
+            }, function(error) {
+              console.error('Sign Out Error', error);
+            });
+    }
 })
 
 .run(['$rootScope', function($rootScope) {
