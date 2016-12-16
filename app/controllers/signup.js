@@ -8,7 +8,8 @@ angular.module('myApp.controllers.signup', [])
 	$scope.passwordSignUp = "";
 	$scope.emailSignIn = "";
 	$scope.passwordSignIn = "";
-
+	$scope.signUpErrorMessage = "";
+	$scope.loginErrorMessage = "";
 	$scope.showSignUp = true;
 
 	$scope.signUp = function() {
@@ -18,7 +19,13 @@ angular.module('myApp.controllers.signup', [])
 			  // Handle Errors here.
 			  var errorCode = error.code;
 			  var errorMessage = error.message;
-			  console.log(errorMessage);
+			  // Need to force apply for some reason
+			  // TODO: Figure out why apply is neccesary
+			  // to update angular binding
+			  $scope.$apply(function() {
+			  	$scope.signUpErrorMessage = errorMessage;
+			  });
+			  console.log("Error message is: " + errorMessage);
 			});
 	}
 
@@ -30,10 +37,12 @@ angular.module('myApp.controllers.signup', [])
 			  var errorCode = error.code;
 			  var errorMessage = error.message;
 			  if (errorCode === 'auth/wrong-password') {
-			    alert('Wrong password.');
+			  	$scope.loginErrorMessage = "Incorrect Password.";
 			  } else {
-			    alert(errorMessage);
+			  	$scope.loginErrorMessage = errorMessage;
 			  }
+			  $scope.$apply();
+			  
 			  console.log(error);
 			});
 	}

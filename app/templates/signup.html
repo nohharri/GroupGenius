@@ -27,6 +27,10 @@
 			<hr>
 			<button class="btn btn-facebook" ng-click="signUpWithFacebook()">Sign up with Facebook</button>
 			<p class="muted">Already a member? <span class="clickable" ng-click="toggleSignUp()" style="text-decoration: underline;">Log in.</span></p>
+			<p ng-if="signUpErrorMessage" 
+			class="error">
+				<small>{{ signUpErrorMessage }}</small>
+			</p>
 		</div>
 
 		<div ng-if="!showSignUp">
@@ -46,6 +50,10 @@
 			<hr>
 			<button class="btn btn-facebook" ng-click="signUpWithFacebook()">Log in with Facebook</button>
 			<p class="muted">Not a member? <span class="clickable" ng-click="toggleSignUp()" style="text-decoration: underline;">Sign up.</span></p>
+			<p ng-if="loginErrorMessage" 
+			class="error">
+				<small>{{ loginErrorMessage }}</small>
+			</p>
 		</div>
 	</div>
 </div>
