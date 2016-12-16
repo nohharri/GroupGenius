@@ -3,8 +3,18 @@ angular.module('myApp.controllers.public', [])
 
 // Homepage controller
 .controller('PublicCtrl', function($scope, $rootScope, firebaseData, headerService) {
-     $scope.isCollapsed = true;
-     $scope.allGroups = groups;
+  
+  	$scope.allGroups = [];
+ //    $scope.allGroupsRef = firebase.database().ref('groups');
+
+ //    //event listener that updates when groups are added to the database
+ //    $scope.allGroupsRef.on('value', function(snapshot) {
+ //    	console.log("groups updated");
+ //    	console.log(snapshot.val());
+ //    	$scope.allGroups = snapshot.val();
+	// });
+
+
 	$scope.classes = ["EECS 482", "EECS 485"];
 	$scope.currentClass = $scope.classes[0];
 	$scope.currentGroup = "Select a Group!"
@@ -38,37 +48,69 @@ angular.module('myApp.controllers.public', [])
 
 	$scope.createNewGroup = function() {
 
+		console.log("create new group");
 		if(!$scope.newName || !$scope.newDesc) {
 			alert("You must designate a name and description. Your group has NOT been created!");
 			return;
 		}
 
-		var newGroup = {};
-		newGroup.org = $("#orgSelect").val();
-		newGroup.name = $scope.newName;
-		newGroup.desc = $scope.newDesc;
-	
+		var numSpots = 0;
 		if($("#limitSelect").val() == "no limit") {
-			newGroup.spots = "unlimited";
+			numSpots = -1;
 		} else {
-			newGroup.spots = $("#limitSelect").val();
+			numSpots = $("#limitSelect").val();
 		}
-		groups.push(newGroup);
 
-		//REMEMBER TO ADD THE PERSON CREATING THE GROUP!!!
-		newGroup.members = [];
-		newGroup.members.push(firebase.auth().currentUser.email);
+		console.log($("#approveCheckBox").val());
 
-		console.log(newGroup);
+		writeNewPost($scope.newName, $scope.newDesc, numSpots, $("orgSelect").val(), $("#approveCheckBox").val());
+
+		
 	}
     
 });
 
 
-var groups = [
 
-	{ "name": "Group #1", "desc": "orem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ante velit, faucibus vitae lacus ut, pellentesque venenatis lorem. Cras condimentum sodales posuere. In accumsan lorem vel posuere mollis. Sed non convallis sem. In ornare eros et fringilla fringilla. Proin tincidunt ipsum vel dui congue, in fringilla tortor cursus. Nullam feugiat lectus nec dui consectetur, in elementum massa finibus. Etiam accumsan nisl velit, a auctor sapien consectetur eget. Integer eu neque ante. Aliquam at justo non elit porttitor mattis vel ac velit.", "members": ["Dina Rudelston", "Megan Helena"], "spots": 4, "org": "EECS 485"},
-	{ "name": "Group #2", "desc": "Desc2", "members": ["Lise Gorelick", "Mav the Maverick"], "spots": 3, "org":"EECS 482"},
-	{ "name": "Group #2", "desc": "This group has pizza", "members": ["Lise Gorelick", "Mav the Maverick"], "spots": 3, "org":"EECS 482"}
-];
+/*
+
+/groups (list of groups)
+	/groupId (a certain group object)
+		/currentMembers (list of user objects)
+			/userID (a certain user object)
+				/name
+				
+
+
+
+*/
+
+function writeNewPost(name, desc, spots, org, mustApprove) {
+
+	console.log("writing a new post");
+
+	var members = [];
+	//add the creator of the group to the members
+	members.push(firebase.auth().currentUser.uid);
+
+  // A post entry.
+  var newGroup = {
+    name: name,
+    desc: desc,
+    members: members,
+    spots: spots,
+    mustApprove: mustApprove,
+    org: org
+  };
+
+  // Get a key for a new Post.
+  var newPostKey = firebase.database().ref().child('groups').push().key;
+
+  // Write the new post's data simultaneously in the posts list and the user's post list.
+  var updates = {};
+  //write the group to the group list
+  updates['/groups/' + newPostKey] = newGroup;
+ 
+  return firebase.database().ref().update(updates);
+}
 
