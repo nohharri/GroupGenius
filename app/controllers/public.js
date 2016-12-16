@@ -57,8 +57,9 @@ angular.module('myApp.controllers.public', [])
 
 		//REMEMBER TO ADD THE PERSON CREATING THE GROUP!!!
 		newGroup.members = [];
+		newGroup.members.push(firebase.auth().currentUser.email);
 
-
+		console.log(newGroup);
 	}
     
 });
