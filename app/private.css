@@ -18,4 +18,9 @@
     height: 500px;
 }
 
+.private #wrapper-chat
+{
+    height: 500px;
+}
+
 a.powered-by-firepad {display:none;} /* remove firepad logo */

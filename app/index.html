@@ -26,10 +26,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/codemirror.css" />
     <link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.4.0/firepad.css" />
 
+    <!-- Firechat dependent css -->
+    <link rel="stylesheet" href="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.css" />
+
+
 </head>
 <body>
     <ng-include src="'templates/header.html'" ng-controller="appCtrl"></ng-include>
     <div ng-view></div>
+
+    <!--jQuery -->
+    <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
 
     <!-- Angular Production Cdn -->
     <script src="bower_components/angular/angular.js"></script>
@@ -46,6 +56,10 @@
     <!-- Firepad Related js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/codemirror.js"></script>
     <script src="https://cdn.firebase.com/libs/firepad/1.4.0/firepad.min.js"></script>
+
+    <!-- Firechat related js -->
+    <script src="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.js"></script>
+
 
     <!-- App -->
     <script src="app.js"></script>
