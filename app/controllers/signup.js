@@ -3,7 +3,7 @@
 angular.module('myApp.controllers.signup', [])
 
 // Homepage controller
-.controller('SignUpCtrl', function($scope, $rootScope, firebaseData) {
+.controller('SignUpCtrl', function($scope, $location, $rootScope, firebaseData) {
 	$scope.emailSignUp = "";
 	$scope.passwordSignUp = "";
 	$scope.emailSignIn = "";
@@ -17,6 +17,9 @@ angular.module('myApp.controllers.signup', [])
 			.createUserWithEmailAndPassword(this.emailSignUp, this.passwordSignUp)
 			.then(function() {
 				console.log("user signed up.");
+				$scope.$apply(function() {
+					redirect('/user');	
+				});
 			})
 			.catch(function(error) {
 			  // Handle Errors here.
@@ -35,6 +38,12 @@ angular.module('myApp.controllers.signup', [])
 	$scope.signIn = function() {
 		firebaseData.provider()
 			.signInWithEmailAndPassword(this.emailSignIn, this.passwordSignIn)
+			.then(function() {
+				console.log('User signed in.');
+				$scope.$apply(function() {
+					redirect('/user');	
+				});
+			})
 		    .catch(function(error) {
 			  // Handle Errors here.
 			  var errorCode = error.code;
@@ -54,7 +63,7 @@ angular.module('myApp.controllers.signup', [])
 		$scope.showSignUp = !$scope.showSignUp;
 	}
 
-	var redirect = function() {
-
+	var redirect = function(path) {
+		$location.path(path);
 	}
 });

@@ -65,12 +65,11 @@ angular.module('myApp', [
 
     $scope.signOut = function() {
         firebaseData.provider()
-            .signOut()
-            .then(function() {
-              console.log('Signed Out');
-            }, function(error) {
-              console.error('Sign Out Error', error);
-            });
+            .signOut().then(function() {
+          console.log('Signed Out');
+        }, function(error) {
+          console.error('Sign Out Error', error);
+        });
     }
 })
 
