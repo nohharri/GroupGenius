@@ -5,14 +5,23 @@ angular.module('myApp.controllers.public', [])
 .controller('PublicCtrl', function($scope, $rootScope, firebaseData, headerService) {
   
   	$scope.allGroups = [];
- //    $scope.allGroupsRef = firebase.database().ref('groups');
+    $scope.allGroupsRef = firebase.database().ref('groups');
 
- //    //event listener that updates when groups are added to the database
- //    $scope.allGroupsRef.on('value', function(snapshot) {
- //    	console.log("groups updated");
- //    	console.log(snapshot.val());
- //    	$scope.allGroups = snapshot.val();
-	// });
+    //event listener that updates when groups are added to the database
+    $scope.allGroupsRef.on('value', function(snapshot) {
+    	console.log("groups updated");
+    	console.log(snapshot.val());
+    	var groupObj = snapshot.val();
+
+    	for( var key in groupObj) {
+    		var group = groupObj[key];
+    		group.groupid = key;
+    		$scope.allGroups.push(group);
+    	}
+    	$scope.$apply();
+    	console.log($scope.allGroups);
+
+	});
 
 
 	$scope.classes = ["EECS 482", "EECS 485"];
@@ -63,8 +72,6 @@ angular.module('myApp.controllers.public', [])
 
 
 		writeNewPost($scope.newName, $scope.newDesc, numSpots, document.getElementById("orgSelect").value, $("#approveCheckBox").val());
-
-		
 	}
     
 });

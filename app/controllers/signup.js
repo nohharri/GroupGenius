@@ -11,12 +11,20 @@ angular.module('myApp.controllers.signup', [])
 	$scope.signUpErrorMessage = "";
 	$scope.loginErrorMessage = "";
 	$scope.showSignUp = true;
+	$scope.firstName = "";
+	$scope.user = {
+		firstName: "",
+		lastName: ""
+	};
 
 	$scope.signUp = function() {
+		//$scope.addUserToFirebase(this.firstName, this.last);
 		firebaseData.provider()
 			.createUserWithEmailAndPassword(this.emailSignUp, this.passwordSignUp)
 			.then(function() {
 				console.log("user signed up.");
+				$scope.addUserToFirebase($scope.user.firstName);
+
 				$scope.$apply(function() {
 					redirect('/user');	
 				});
@@ -65,5 +73,32 @@ angular.module('myApp.controllers.signup', [])
 
 	var redirect = function(path) {
 		$location.path(path);
+	}
+	$scope.addUserToFirebase = function(firstName) {
+		console.log("adding a user");
+
+		
+		console.log(firstName);
+		console.log(this.lastName);
+
+					
+
+	  // A post entry.
+	  var newUser = {
+	    firstName: $scope.firstName, 
+	    lastName: $scope.lastName,
+	    uid: firebase.auth().currentUser.uid,
+	    email: $scope.emailSignUp
+								  
+	  };
+
+	  // Get a key for a new Post.
+	  var newPostKey = firebase.database().ref().child('users').push().key;
+
+	  var updates = {};
+	  //write the user to the user list
+	  updates['/users/' + newPostKey] = newUser;
+	 
+	  return firebase.database().ref().update(updates);
 	}
 });

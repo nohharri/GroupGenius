@@ -4,12 +4,13 @@
 			<h2>Sign Up</h2>
 			<hr>
 			<div>
-				<input ng-model="firstName"
+				{{firstName}}
+				<input ng-model="user.firstName" id="firstName"
 				type="text"
 				placeholder="First Name">
 			</div>
 			<div>
-				<input ng-model="lastName"
+				<input ng-model="user.lastName"
 				type="text"
 				placeholder="Last Name">
 			</div>
