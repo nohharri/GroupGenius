@@ -57,8 +57,9 @@ angular.module('myApp.controllers.public', [])
 
 		//REMEMBER TO ADD THE PERSON CREATING THE GROUP!!!
 		newGroup.members = [];
+		newGroup.members.push(firebase.auth().currentUser.email);
 
-
+		console.log(newGroup);
 	}
     
 });
@@ -67,6 +68,7 @@ angular.module('myApp.controllers.public', [])
 var groups = [
 
 	{ "name": "Group #1", "desc": "orem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ante velit, faucibus vitae lacus ut, pellentesque venenatis lorem. Cras condimentum sodales posuere. In accumsan lorem vel posuere mollis. Sed non convallis sem. In ornare eros et fringilla fringilla. Proin tincidunt ipsum vel dui congue, in fringilla tortor cursus. Nullam feugiat lectus nec dui consectetur, in elementum massa finibus. Etiam accumsan nisl velit, a auctor sapien consectetur eget. Integer eu neque ante. Aliquam at justo non elit porttitor mattis vel ac velit.", "members": ["Dina Rudelston", "Megan Helena"], "spots": 4, "org": "EECS 485"},
-	{ "name": "Group #2", "desc": "Desc2", "members": ["Lise Gorelick", "Mav the Maverick"], "spots": 3, "org":"EECS 482"}
+	{ "name": "Group #2", "desc": "Desc2", "members": ["Lise Gorelick", "Mav the Maverick"], "spots": 3, "org":"EECS 482"},
+	{ "name": "Group #2", "desc": "This group has pizza", "members": ["Lise Gorelick", "Mav the Maverick"], "spots": 3, "org":"EECS 482"}
 ];
 

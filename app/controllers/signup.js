@@ -17,7 +17,9 @@ angular.module('myApp.controllers.signup', [])
 			.createUserWithEmailAndPassword(this.emailSignUp, this.passwordSignUp)
 			.then(function() {
 				console.log("user signed up.");
-				redirect('/user');
+				$scope.$apply(function() {
+					redirect('/user');	
+				});
 			})
 			.catch(function(error) {
 			  // Handle Errors here.
@@ -38,7 +40,9 @@ angular.module('myApp.controllers.signup', [])
 			.signInWithEmailAndPassword(this.emailSignIn, this.passwordSignIn)
 			.then(function() {
 				console.log('User signed in.');
-				redirect('/user');
+				$scope.$apply(function() {
+					redirect('/user');	
+				});
 			})
 		    .catch(function(error) {
 			  // Handle Errors here.
