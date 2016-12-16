@@ -15,7 +15,7 @@ angular.module('myApp', [
     'myApp.controllers.private'
     ])
 
-.config(['$routeProvider', function($routeProvider, $locationProvider) {
+.config(['$routeProvider', function($routeProvider) {
 
     $routeProvider.when('/landing', {
         title: 'Landing',
@@ -52,8 +52,6 @@ angular.module('myApp', [
         redirectTo: '/landing'
     });
 
-    $locationProvider.html5Mode(true);
-
 }])
 
 // Global app controller
@@ -67,12 +65,11 @@ angular.module('myApp', [
 
     $scope.signOut = function() {
         firebaseData.provider()
-            .signOut()
-            .then(function() {
-              console.log('Signed Out');
-            }, function(error) {
-              console.error('Sign Out Error', error);
-            });
+            .signOut().then(function() {
+          console.log('Signed Out');
+        }, function(error) {
+          console.error('Sign Out Error', error);
+        });
     }
 })
 
