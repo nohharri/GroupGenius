@@ -61,9 +61,8 @@ angular.module('myApp.controllers.public', [])
 			numSpots = $("#limitSelect").val();
 		}
 
-		console.log($("#approveCheckBox").val());
 
-		writeNewPost($scope.newName, $scope.newDesc, numSpots, $("orgSelect").val(), $("#approveCheckBox").val());
+		writeNewPost($scope.newName, $scope.newDesc, numSpots, document.getElementById("orgSelect").value, $("#approveCheckBox").val());
 
 		
 	}
