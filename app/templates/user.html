@@ -2,48 +2,55 @@
 <div id="wrapper-user" class="">
 	<div id="" class="user row">
 		<div id="wrapper-sidebar" class="col-md-2">
-			b
+			<div id="" class="wrapper-profile">
+				<img src="" class="img-circle"/>
+				<h3>Username</h3>
+			</div>
+
+			<div id="" class="wrapper-quicklinks">
+				<span ng-click="scrollTo('#orgX')">orgX</span>
+			</div>
 		</div>
 		<div id="wrapper-main" class="col-md-10">
 		
-		<button>LOOOK FOR DEM GROUPS YO</button>
+			<button>LOOOK FOR DEM GROUPS YO</button>
 
-		<div id="" class="wrapper-organization">
-			<h2>Org title</h2>
-			<span class="caret" data-target="#orgContent" data-toggle="collapse"></span>
-			<div id="orgContent" class="row">
-				<div id="wrapper-group-groupTitle" class="wrapper-group col-md-4 collapse in">
-					<div class="group-title-bar">
-						<h3>Group Title</h3>
-					</div>
-					<div id="" class="wrapper-group-notification row">
-						<div id="" class="group-notification col-md-4">
-							<div class="group-notification-icon"></div>
-							X new Balls
+			<div id="orgX" class="wrapper-organization">
+				<h2>Org title</h2>
+				<span class="caret" data-target="#orgContent" data-toggle="collapse"></span>
+				<div id="orgContent" class="row">
+					<div id="wrapper-group-groupTitle" class="wrapper-group col-md-4 collapse in">
+						<div class="group-title-bar">
+							<h3>Group Title</h3>
 						</div>
-						<div id="" class="group-notification col-md-4">
-							<div class="group-notification-icon"></div>
-							X new Balls
-						</div>
-						<div id="" class="group-notification col-md4">
-							<div class="group-notification-icon"></div>
-							X new Balls
-						</div>
-
-						<span class="caret" data-target="#org-group-notifications" data-toggle="collapse"></span>
-						<div id="org-group-notifications" class="wrapper-group-notification-details collapse">
-							<!-- ng-repeat for notifications -->
-							<div class="group-notification-detail">
-								<div class="group-notification-icon-small"></div>
-								Stali changed the group name
+						<div id="" class="wrapper-group-notification row">
+							<div id="" class="group-notification col-md-4">
+								<div class="group-notification-icon"></div>
+								X new Balls
 							</div>
-						</div> <!-- END expanded notifications -->
+							<div id="" class="group-notification col-md-4">
+								<div class="group-notification-icon"></div>
+								X new Balls
+							</div>
+							<div id="" class="group-notification col-md4">
+								<div class="group-notification-icon"></div>
+								X new Balls
+							</div>
 
-					</div> <!-- END notification wrapper -->
-				</div><!-- END .wrapper-group -->
-			</div> <!-- END .row -->
+							<span class="caret" data-target="#org-group-notifications" data-toggle="collapse"></span>
+							<div id="org-group-notifications" class="wrapper-group-notification-details collapse">
+								<!-- ng-repeat for notifications -->
+								<div class="group-notification-detail">
+									<div class="group-notification-icon-small"></div>
+									Stali changed the group name
+								</div>
+							</div> <!-- END expanded notifications -->
 
-		</div> <!-- END .wrapper-organization -->
+						</div> <!-- END notification wrapper -->
+					</div><!-- END .wrapper-group -->
+				</div> <!-- END .row -->
+
+			</div> <!-- END .wrapper-organization -->
 
 		</div>
 	</div> <!-- END .row -->
