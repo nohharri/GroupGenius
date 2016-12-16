@@ -9,6 +9,8 @@ angular.module('myApp.controllers.signup', [])
 	$scope.emailSignIn = "";
 	$scope.passwordSignIn = "";
 
+	$scope.showSignUp = true;
+
 	$scope.signUp = function() {
 		firebaseData.provider()
 			.createUserWithEmailAndPassword($scope.emailSignUp, $scope.passwordSignUp)
@@ -34,5 +36,9 @@ angular.module('myApp.controllers.signup', [])
 			  }
 			  console.log(error);
 			});
+	}
+
+	$scope.toggleSignUp = function() {
+		$scope.showSignUp = !$scope.showSignUp;
 	}
 });

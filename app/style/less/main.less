@@ -4,7 +4,7 @@
 // Header
 .header {
 	width: 100%;
-	background-color: @blue;
+	background-color: @blue-color;
 	position: relative;
 	padding: 15px 10px 15px 10px;
 }
@@ -12,3 +12,72 @@
 .header-content {
 	height: 40px;
 }
+
+// Common
+.box {
+	padding: 20px 20px 20px 20px;
+	border: 1px solid @grey-color-lighter;
+	border-top: 2px solid @grey-color-lighter;
+	border-bottom: 2px solid @grey-color-light;
+	border-radius: 5px;
+	display: inline-block;
+}
+
+.muted {
+	padding-top: 20px;
+	color: @grey-color-light;
+	font-size: 12px;
+}
+
+.clickable {
+	cursor: pointer;
+}
+
+// Bootstrap Override
+.btn-primary {
+	background-color: @blue-color;
+	border: darken(@blue-color, 10%);
+	&:hover {
+		background-color: darken(@blue-color, 10%);
+	}
+}
+
+// Signup
+#signup input {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	border-top: 2px solid @grey-color-light;
+	border-bottom: 2px solid @grey-color-lighter;
+	width: 100%;
+}
+
+#signup .box {
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
+#signup {
+	text-align: center;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+
+#signup .btn {
+	margin-top: 20px;
+	width: 100%;
+}
+
+#signup .btn-facebook {
+	margin-top: 0px;
+}
+
+.btn-facebook {
+	color: white;
+	background-color: @facebook-color;
+
+	&:hover {
+		color: white;
+		background-color: darken(@facebook-color, 10%);
+	}
+}
+
