@@ -1,10 +1,48 @@
 <!-- Public Messaging Screen -->
 
 <div class="row" id="public-messaging-screen">
-	<div class="col-md-4" id="search-pane">
-		Test
+	<!-- group list -->
+	<div class="col-md-4" id="search-pane" style="border:solid">
+		<!-- Example single danger button -->
+		<div class="btn-group" style="margin: 10px;">
+		  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    Action
+		  </button>
+		  <div class="dropdown-menu">
+		    <a class="dropdown-item" href="#">Action</a>
+		    <a class="dropdown-item" href="#">Another action</a>
+		    <a class="dropdown-item" href="#">Something else here</a>
+		  </div>
+		</div>
+
+
+		<div>
+			<button type="button" class="btn btn-success" style="display:inline-block" style="margin-left:10px;">Create New Group</button>
+			<input type="text" class="form-control" id="search-input" placeholder="Search for groups..." autocomplete="off" style="width: 60%;display:inline-block;">
+		</div>
+
+		<div style="margin: 10px;">
+			<ul class="list-group">
+			  <li class="list-group-item">Cras justo odio</li>
+			  <li class="list-group-item">Dapibus ac facilisis in</li>
+			  <li class="list-group-item">Morbi leo risus</li>
+			  <li class="list-group-item">Porta ac consectetur ac</li>
+			  <li class="list-group-item">Vestibulum at eros</li>
+			</ul>
+		</div>
+
 	</div>
-	<div class="col-md-8" id="search-pane">
-		Test
+
+	
+
+	<!-- specific group -->
+	<div class="col-md-8" id="search-pane" style="border:solid">
+		<h2>Group Name</h2>
+		<br>
+		<p>Group Description</p>
+		<br>
+		<button type="button" class="btn btn-success">Join this Group</button>
+		<br>
+		<div>Comments</div>
 	</div>
 </div>
