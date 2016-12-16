@@ -1,5 +1,4 @@
 'use strict';
-
 angular.module('myApp.controllers.public', [])
 
 // Homepage controller
@@ -8,3 +7,4 @@ angular.module('myApp.controllers.public', [])
 
     //åheaderService.set("different");
 });
+
