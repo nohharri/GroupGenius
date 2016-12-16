@@ -5,16 +5,23 @@ angular.module('myApp.controllers.public', [])
 .controller('PublicCtrl', function($scope, $rootScope, firebaseData, headerService) {
      $scope.isCollapsed = true;
      $scope.allGroups = groups;
-<<<<<<< HEAD
+	$scope.classes = ["EECS 482", "EECS 485"];
+	$scope.currentClass = $scope.classes[0];
 	$scope.currentGroup = "Select a Group!"
-=======
+	$scope.isActiveClass = function(clas){
+		if($scope.currentClass == clas){
+			return true;
+		} return false;
+		}
      $scope.updateGroup = function(name, desc, members, spots) {
      	$scope.currentGroup = name;
      	$scope.currentMembers = 'Current Members: ' + $scope.formatMembers(members);
      	$scope.openSpots = 'Open Spots: ' + spots;
      	$scope.desc = 'Description: ' + desc;
      };
->>>>>>> 8fecd6193dfb9ff70ac4d829c4174e1ad001747f
+	$scope.selCls = function(clas) {
+		$scope.currentClass = clas;
+	}
      $scope.formatMembers = function(members) {
 		var s = ' ';
 		for( var i = 0; i < members.length; ++i) {
@@ -26,18 +33,11 @@ angular.module('myApp.controllers.public', [])
 
 		return s;
 	};
-     $scope.updateGroup = function(name, desc, members, spots) {
-     	$scope.currentGroup = name;
-     	$scope.currentMembers = 'Current Members: ' + $scope.formatMembers(members);
-     	$scope.openSpots = 'Open Spots: ' + spots;
-     	$scope.desc = 'Description: ' + desc;
-     };
     //åheaderService.set("different");
 });
 
 
 var groups = [
-	{ "name": "Group #1", "desc": "orem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ante velit, faucibus vitae lacus ut, pellentesque venenatis lorem. Cras condimentum sodales posuere. In accumsan lorem vel posuere mollis. Sed non convallis sem. In ornare eros et fringilla fringilla. Proin tincidunt ipsum vel dui congue, in fringilla tortor cursus. Nullam feugiat lectus nec dui consectetur, in elementum massa finibus. Etiam accumsan nisl velit, a auctor sapien consectetur eget. Integer eu neque ante. Aliquam at justo non elit porttitor mattis vel ac velit.", "members": ["Dina Rudelston", "Megan Helena"], "spots": 4},
-	{ "name": "Group #2", "desc": "Desc2", "members": ["Lise Gorelick", "Mav the Maverick"], "spots": 3}
+	{ "name": "Group #1", "desc": "orem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ante velit, faucibus vitae lacus ut, pellentesque venenatis lorem. Cras condimentum sodales posuere. In accumsan lorem vel posuere mollis. Sed non convallis sem. In ornare eros et fringilla fringilla. Proin tincidunt ipsum vel dui congue, in fringilla tortor cursus. Nullam feugiat lectus nec dui consectetur, in elementum massa finibus. Etiam accumsan nisl velit, a auctor sapien consectetur eget. Integer eu neque ante. Aliquam at justo non elit porttitor mattis vel ac velit.", "members": ["Dina Rudelston", "Megan Helena"], "spots": 4, "org": "EECS 485"},
+	{ "name": "Group #2", "desc": "Desc2", "members": ["Lise Gorelick", "Mav the Maverick"], "spots": 3, "org":"EECS 482"}
 ];
-
