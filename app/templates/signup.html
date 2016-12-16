@@ -27,10 +27,10 @@
 			<hr>
 			<button class="btn btn-facebook" ng-click="signUpWithFacebook()">Sign up with Facebook</button>
 			<p class="muted">Already a member? <span class="clickable" ng-click="toggleSignUp()" style="text-decoration: underline;">Log in.</span></p>
-			<p ng-if="signUpErrorMessage" 
+			<div><p ng-if="signUpErrorMessage" 
 			class="error">
 				<small>{{ signUpErrorMessage }}</small>
-			</p>
+			</p></div>
 		</div>
 
 		<div ng-if="!showSignUp">

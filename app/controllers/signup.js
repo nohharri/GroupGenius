@@ -14,7 +14,10 @@ angular.module('myApp.controllers.signup', [])
 
 	$scope.signUp = function() {
 		firebaseData.provider()
-			.createUserWithEmailAndPassword($scope.emailSignUp, $scope.passwordSignUp)
+			.createUserWithEmailAndPassword(this.emailSignUp, this.passwordSignUp)
+			.then(function() {
+				console.log("user signed up.");
+			})
 			.catch(function(error) {
 			  // Handle Errors here.
 			  var errorCode = error.code;
@@ -42,7 +45,7 @@ angular.module('myApp.controllers.signup', [])
 			  	$scope.loginErrorMessage = errorMessage;
 			  }
 			  $scope.$apply();
-			  
+
 			  console.log(error);
 			});
 	}
