@@ -7,7 +7,7 @@ angular.module('myApp.controllers.public', [])
      $scope.allGroups = groups;
      $scope.updateGroup = function(name, desc, members, spots) {
      	$scope.currentGroup = name;
-     	$scope.currentMembers = 'Current Members: ' + formatMembers(members);
+     	$scope.currentMembers = 'Current Members: ' + $scope.formatMembers(members);
      	$scope.openSpots = 'Open Spots: ' + spots;
      	$scope.desc = 'Description: ' + desc;
      };
