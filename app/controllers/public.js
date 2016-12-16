@@ -5,7 +5,16 @@ angular.module('myApp.controllers.public', [])
 .controller('PublicCtrl', function($scope, $rootScope, firebaseData, headerService) {
      $scope.isCollapsed = true;
      $scope.allGroups = groups;
+<<<<<<< HEAD
 	$scope.currentGroup = "Select a Group!"
+=======
+     $scope.updateGroup = function(name, desc, members, spots) {
+     	$scope.currentGroup = name;
+     	$scope.currentMembers = 'Current Members: ' + $scope.formatMembers(members);
+     	$scope.openSpots = 'Open Spots: ' + spots;
+     	$scope.desc = 'Description: ' + desc;
+     };
+>>>>>>> 8fecd6193dfb9ff70ac4d829c4174e1ad001747f
      $scope.formatMembers = function(members) {
 		var s = ' ';
 		for( var i = 0; i < members.length; ++i) {
