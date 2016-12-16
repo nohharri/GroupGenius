@@ -18,7 +18,7 @@
 
 
 		<div style="padding: 10px;">
-			<button type="button" class="btn btn-success" style="display:inline-block" data-toggle="modal" data-target="createGroupModal" style="margin-left: 10px">Create New Group</button>
+			<button type="button" class="btn btn-success" style="display:inline-block" data-toggle="modal" data-target="createGroupModal" style="width: 20%; margin-left: 10px">Create New Group</button>
 			<input type="text" class="form-control" id="search-input" placeholder="Search for groups..." autocomplete="off" style="width: 59.5%;display:inline-block;">
 		</div>
 
@@ -36,14 +36,14 @@
 	
 
 	<!-- specific group -->
-	<div class="col-md-7" id="search-pane" style="border:solid;margin: 10px" ng-init="currentGroup=allGroups[0].name; currentMembers='Current Members: ' + formatMembers(allGroups[0].members); openSpots='Open Spots: ' + allGroups[0].spots;desc='Description: ' + allGroups[0].desc ; ">
-		<h2 ng-bind="currentGroup" style="text-align: center;">Group Name</h2>
+	<div class="col-md-7" id="search-pane" style="border:solid;margin: 10px">
+		<h2 ng-bind="currentGroup" style="text-align: center;">Select A Group!</h2>
 		<br>
-		<p ng-bind="currentMembers">Curr Mem</p>
+		<p ng-bind="currentMembers"></p>
 		<br>
-		<p ng-bind="openSpots">Open Spots: 3</p>
+		<p ng-bind="openSpots"></p>
 		<br>
-		<p ng-bind="desc">Group Description</p>
+		<p ng-bind="desc"></p>
 		<br>
 		<button style="display: block;margin: auto; text-align: center;"type="button" class="btn btn-success">Join this Group</button>
 		<br>
