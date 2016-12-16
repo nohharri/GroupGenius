@@ -22,12 +22,51 @@ angular.module('myApp.controllers.public', [])
 
 		return s;
 	};
-    //åheaderService.set("different");
+
+
+
+	$scope.createNewGroup = function() {
+
+		if(!$scope.newName || !$scope.newDesc) {
+			alert("You must designate a name and description. Your group has NOT been created!");
+			return;
+		}
+
+		var newGroup = {};
+		newGroup.org = $("#orgSelect").val();
+		newGroup.name = $scope.newName;
+		newGroup.desc = $scope.newDesc;
+	
+		if($("#limitSelect").val() == "no limit") {
+			newGroup.spots = "unlimited";
+		} else {
+			newGroup.spots = $("#limitSelect").val();
+		}
+		groups.push(newGroup);
+
+		//REMEMBER TO ADD THE PERSON CREATING THE GROUP!!!
+		newGroup.members = [];
+
+
+	}
+    
 });
 
 
 var groups = [
-	{ "name": "Group #1", "desc": "Desc", "members": ["Dina Rudelston", "Megan Helena"], "spots": 4},
-	{ "name": "Group #2", "desc": "Desc2", "members": ["Lise Gorelick", "Mav the Maverick"], "spots": 3}
+	{ "org": "EECS 482", "name": "Group #1", "desc": "Desc", "members": ["Dina Rudelston", "Megan Helena"], "spots": 4},
+	{ "org": "EECS 482", "name": "Group #2", "desc": "Desc2", "members": ["Lise Gorelick", "Mav the Maverick"], "spots": 3}
 ];
+
+
+
+
+
+
+
+
+
+
+
+
 

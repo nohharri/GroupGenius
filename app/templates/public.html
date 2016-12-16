@@ -66,65 +66,54 @@
 		      	<!-- organization -->
 		      	<div>
 		        	<h3 style="display:inline-block;">Organization: </h3>
-		        	<div class="dropdown" style="display:inline-block;">
-					  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					    EECS 482 <span class="caret"></span>
-					  </button>
-					  <ul class="dropdown-menu">
-						<li>EECS 388</li>
-						<li>EECS 485</li>
-					  </ul>
+		        	<div style="display:inline-block;">
+					  <select id="orgSelect">
+						  <option value="482" selected>EECS 482</option>
+						  <option value="388">EECS 388</option>
+						  <option value="445">EECS 445</option>
+						</select>
 					</div>
 		        </div>
 		      	
 				<!-- group name -->
 		        <div>
 		        	<h3 style="display:inline-block;">Group Name: </h3>
-		        	<input style="display:inline-block;" type="text">
+		        	<input ng-model="newName" style="display:inline-block;" type="text">
 		        </div>
 		        <!-- description -->
 		        <div>
 		        	<h3 style="display:inline-block;">Description: </h3>
-		        	<input style="display:inline-block;" type="text">
+		        	<input ng-model="newDesc" style="display:inline-block;" type="text">
 		        </div>
 		        <!-- organization -->
-		        	<h3>Approve All Members <input type="checkbox" id="cbox1" value="first_checkbox"></h3>
+		        	<h3>Approve All Members <input ng-model="mustApprove" type="checkbox" id="cbox1"></h3>
 		      	<!-- num members -->
 		      	<div>
 		      		<h3 style="display:inline-block;">Members Limit: </h3>
 		      		<div style="display:inline-block;" class="dropdown">
-					  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					    no limit <span class="caret"></span>
-					  </button>
-					  <ul class="dropdown-menu">
-						<li>1</li>
-						<li>2</li>
-						<li>3</li>
-						<li>4</li>
-						<li>5</li>
-						<li>6</li>
-						<li>7</li>
-						<li>8</li>
-						<li>9</li>
-						<li>10</li>
-						<li>12</li>
-						<li>13</li>
-						<li>14</li>
-						<li>15</li>
-						<li>16</li>
-						<li>17</li>
-						<li>18</li>
-						<li>19</li>
-						<li>20</li>
-					  </ul>
+					  
+					  <select id="limitSelect">
+						  <option>no limit</option>
+						  <option>1</option>
+						  <option>2</option>
+						  <option>3</option>
+						  <option>4</option>
+						  <option>5</option>
+						  <option>6</option>
+						  <option>7</option>
+						  <option>8</option>
+						  <option>9</option>
+						  <option>10</option>
+						</select>
 					</div>
+					
 		      	</div>
 		      	
 			</div>
 
 
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="createNewGroup()">Create</button>
 	      </div>
 	    </div>
 	  </div>
