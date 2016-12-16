@@ -15,7 +15,7 @@ angular.module('myApp', [
     'myApp.controllers.private'
     ])
 
-.config(['$routeProvider', function($routeProvider) {
+.config(['$routeProvider', function($routeProvider, $locationProvider) {
 
     $routeProvider.when('/landing', {
         title: 'Landing',
@@ -51,6 +51,8 @@ angular.module('myApp', [
     $routeProvider.otherwise({
         redirectTo: '/landing'
     });
+
+    $locationProvider.html5Mode(true);
 
 }])
 
