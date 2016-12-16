@@ -1,5 +1,4 @@
 'use strict';
-
 angular.module('myApp.controllers.public', [])
 
 // Homepage controller
@@ -26,11 +25,9 @@ angular.module('myApp.controllers.public', [])
     //åheaderService.set("different");
 });
 
+
 var groups = [
 	{ "name": "Group #1", "desc": "Desc", "members": ["Dina Rudelston", "Megan Helena"], "spots": 4},
 	{ "name": "Group #2", "desc": "Desc2", "members": ["Lise Gorelick", "Mav the Maverick"], "spots": 3}
 ];
-
-
-
 

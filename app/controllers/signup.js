@@ -34,7 +34,7 @@ angular.module('myApp.controllers.signup', [])
 
 	$scope.signIn = function() {
 		firebaseData.provider()
-			.signInWithEmailAndPassword($scope.emailSignIn, $scope.passwordSignIn)
+			.signInWithEmailAndPassword(this.emailSignIn, this.passwordSignIn)
 		    .catch(function(error) {
 			  // Handle Errors here.
 			  var errorCode = error.code;
@@ -52,5 +52,9 @@ angular.module('myApp.controllers.signup', [])
 
 	$scope.toggleSignUp = function() {
 		$scope.showSignUp = !$scope.showSignUp;
+	}
+
+	var redirect = function() {
+
 	}
 });

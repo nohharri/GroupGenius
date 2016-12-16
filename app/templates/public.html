@@ -2,19 +2,16 @@
 
 <div class="row" id="public-messaging-screen" style="padding: 40px;">
 	<!-- group list -->
+
 	<div class="col-md-4" id="search-pane" style="border:solid; margin: 10px">
 		
 		<!-- Org Dropdown -->
-		<div style="display: block;margin: auto; text-align: center;">
-			<div class="btn-group" style="margin: 10px;">
-			  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			    EECS 482
-			  </button>
-			  <div class="dropdown-menu">
-			    <a class="dropdown-item" href="#">EECS 388</a>
-			    <a class="dropdown-item" href="#">EECS 485</a>
-			  </div>
-			</div>
+		<div class="dropdown" style="display: block;margin: auto; text-align: center;">
+			<button class="btn btn-primary dropdown-toggle" style="width: 100%" type="button" data-toggle="dropdown">EECS 482 <span class="caret"></span></button>
+			<ul class="dropdown-menu">
+				<li>EECS 388</li>
+				<li>EECS 485</li>
+			</ul>
 		</div>
 
 		
@@ -32,7 +29,6 @@
 			  	<p>{{formatMembers(group.members)}}</p>
 			  	<p>{{group.desc}}</p>
 			  </li>
-		
 			</ul>
 		</div>
 	</div>
