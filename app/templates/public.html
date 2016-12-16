@@ -3,14 +3,17 @@
 <div class="row" id="public-messaging-screen" style="padding: 40px;">
 	<!-- group list -->
 
-	<div class="col-md-4" id="search-pane" style="border:solid; margin: 10px">
+	<div class="col-md-4" id="search-pane" style=" margin: 10px">
 		
 		<!-- Org Dropdown -->
 		<div class="dropdown" style="display: block;margin: auto; text-align: center;">
-			<button class="btn btn-primary dropdown-toggle" style="width: 100%" type="button" data-toggle="dropdown">EECS 482 <span class="caret"></span></button>
+			<button class="btn btn-primary dropdown-toggle" style="width: 100%" type="button" data-toggle="dropdown">{{currentClass}} <span class="caret"></span></button>
 			<ul class="dropdown-menu">
-				<li>EECS 388</li>
-				<li>EECS 485</li>
+				<li ng-repeat="class in classes">
+					<a ng-click="selCls(class)">
+					{{class}}
+					</a>
+				</li>
 			</ul>
 		</div>
 
@@ -24,10 +27,11 @@
 
 		<div style="margin: 10px;">
 			<ul class="list-group">
-			  <li ng-repeat="group in allGroups" class="list-group-item" ng-click="updateGroup(group.name, group.desc, group.members, group.spots);">
+			  <li ng-repeat="group in allGroups" class="list-group-item" ng-click="updateGroup(group.name, group.desc, group.members, group.spots);" ng-if="isActiveClass(group.org)">
+				
 			  	<h3>{{group.name}}</h3>
-			  	<p>{{formatMembers(group.members)}}</p>
-			  	<p>{{group.desc}}</p>
+			  	<p>{{formatMembers(group.members) | limitTo: 50}}{{formatMembers(group.members).length > 50 ? ' ...' : ''}}</p>
+			  	<p>{{group.desc | limitTo: 50}}{{group.desc.length > 20 ? ' ...' : ''}}</p>
 			  </li>
 			</ul>
 		</div>
@@ -36,14 +40,14 @@
 	
 
 	<!-- specific group -->
-	<div class="col-md-7" id="search-pane" style="border:solid;margin: 10px" ng-init="currentGroup=allGroups[0].name; currentMembers='Current Members: ' + formatMembers(allGroups[0].members); openSpots='Open Spots: ' + allGroups[0].spots;desc='Description: ' + allGroups[0].desc ; ">
-		<h2 ng-bind="currentGroup" style="text-align: center;">Group Name</h2>
+	<div class="col-md-7" id="search-pane" style="margin: 10px">
+		<h2 ng-bind="currentGroup" style="text-align: center;">Select A Group!</h2>
 		<br>
-		<p ng-bind="currentMembers">Curr Mem</p>
+		<p ng-bind="currentMembers"></p>
 		<br>
-		<p ng-bind="openSpots">Open Spots: 3</p>
+		<p ng-bind="openSpots"></p>
 		<br>
-		<p ng-bind="desc">Group Description</p>
+		<p ng-bind="desc"></p>
 		<br>
 		<button style="display: block;margin: auto; text-align: center;"type="button" class="btn btn-success">Join this Group</button>
 		<br>
