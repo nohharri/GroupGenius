@@ -7,27 +7,25 @@
 		
 		<!-- Org Dropdown -->
 		<div class="dropdown" style="display: block;margin: auto; text-align: center;">
-			<button class="btn btn-primary dropdown-toggle" style="width: 100%" type="button" data-toggle="dropdown">{{currentClass}} <span class="caret"></span></button>
-			<ul class="dropdown-menu">
-				<li ng-repeat="class in classes">
+			<button class="btn btn-primary dropdown-toggle" style="width: 100%; font-size: 20px" type="button" data-toggle="dropdown">{{currentClass}} <span class="caret"></span></button>
+			<ul class="dropdown-menu" style="width: 100%">
+				<li ng-repeat="class in classes" style="width: 100%; font-size: 18px">
+<center>
 					<a ng-click="selCls(class)">
 					{{class}}
 					</a>
+</center>
 				</li>
 			</ul>
 		</div>
 
+			<input type="text" class="form-control" id="search-input" placeholder="Search for groups..." autocomplete="off" style="width: 100%;display:inline-block;" ng-model="searchText">
 		
 
 
-		<div style="padding: 10px;">
-			<button type="button" class="btn  btn-success btn-lg" data-toggle="modal" data-target="#myModal">Create New Group</button>
-			<input type="text" class="form-control" id="search-input" placeholder="Search for groups..." autocomplete="off" style="width: 59.5%;display:inline-block;">
-		</div>
-
 		<div style="margin: 10px;">
 			<ul class="list-group">
-			  <li ng-repeat="group in allGroups" class="list-group-item" ng-click="updateGroup(group.name, group.desc, group.members, group.spots);" ng-if="isActiveClass(group.org)">
+			  <li ng-repeat="group in allGroups | filter:searchText" class="list-group-item" ng-click="updateGroup(group.name, group.desc, group.members, group.spots);" ng-if="isActiveClass(group.org)">
 				
 			  	<h3>{{group.name}}</h3>
 			  	<p>{{formatMembers(group.members) | limitTo: 50}}{{formatMembers(group.members).length > 50 ? ' ...' : ''}}</p>
@@ -35,12 +33,19 @@
 			  </li>
 			</ul>
 		</div>
+
+<center>
+		<div style="padding: 10px;">
+			<button type="button" class="btn  btn-success btn-lg" data-toggle="modal" data-target="#myModal">Create New Group</button>
+		</div>
+</center>
 	</div>
 
 	
 
 	<!-- specific group -->
 	<div class="col-md-7" id="search-pane" style="margin: 10px">
+		<div class="well">
 		<h2 ng-bind="currentGroup" style="text-align: center;">Select A Group!</h2>
 		<br>
 		<p ng-bind="currentMembers"></p>
@@ -51,7 +56,7 @@
 		<br>
 		<button style="display: block;margin: auto; text-align: center;"type="button" class="btn btn-success">Join this Group</button>
 		<br>
-		
+		</div>
 	</div>
 
 	<!-- Modal -->
