@@ -58,6 +58,22 @@ angular.module('myApp', [
 .controller('appCtrl', function($scope, $rootScope, firebaseData, headerService) {
     $scope.isAuthenticated = true;
     $scope.showProfileSettings = false;
+    $scope.headerUsername = "Guest"
+
+    firebaseData.provider().onAuthStateChanged(function(user) {
+
+        if(user){
+            //We have a user
+            $scope.headerUsername = user.email;
+            $scope.isAuthenticated = true;
+
+        }else{
+            $scope.headerUsername = "Guest";
+            $scope.isAuthenticated = false;
+
+        }
+
+    });
 
     $scope.toggleProfileSettings = function() {
         $scope.showProfileSettings = !$scope.showProfileSettings;
@@ -65,11 +81,11 @@ angular.module('myApp', [
 
     $scope.signOut = function() {
         firebaseData.provider()
-            .signOut().then(function() {
+        .signOut().then(function() {
           console.log('Signed Out');
-        }, function(error) {
+      }, function(error) {
           console.error('Sign Out Error', error);
-        });
+      });
     }
 })
 
