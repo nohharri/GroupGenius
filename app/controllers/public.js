@@ -2,7 +2,7 @@
 angular.module('myApp.controllers.public', [])
 
 // Homepage controller
-.controller('PublicCtrl', function($scope, $rootScope, firebaseData, headerService) {
+.controller('PublicCtrl', function($scope, $rootScope, firebaseData, headerService, $http) {
   
   	$scope.allGroups = [];
     $scope.allGroupsRef = firebase.database().ref('groups');
@@ -22,9 +22,13 @@ angular.module('myApp.controllers.public', [])
     	console.log($scope.allGroups);
 
 	});
-
-
-	$scope.classes = ["EECS 482", "EECS 485"];
+	$scope.classes = [];
+	$scope.getClasses = function()
+	{
+		$http.get('https://groupgenius-5953b.firebaseio.com/organizations.json').success(
+			function (response) { $scope.classes  = response;});
+	}
+	$scope.getClasses();
 	$scope.currentClass = $scope.classes[0];
 	$scope.currentGroup = "Select a Group!"
 	$scope.isActiveClass = function(clas){
