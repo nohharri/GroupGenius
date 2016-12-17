@@ -6,6 +6,7 @@ angular.module('myApp.controllers.private', [])
 .controller('PrivateCtrl', function($scope, $rootScope, firebaseData) {
     $scope.isCollapsed = true;
     $scope.messages = [];
+    $scope.messageText = "";
 
     var firepadRef = firebaseData.database().ref();
     var codeMirror = CodeMirror(document.getElementById('wrapper-document'), { lineWrapping: true });
@@ -15,33 +16,27 @@ angular.module('myApp.controllers.private', [])
         defaultText: 'Hello, World!'
     });
 
+    var chatRef = firebaseData.database().ref('/chat/');
 
-    // firebaseData.provider().onAuthStateChanged(function(user) {
-
-        var chatRef = firebaseData.database().ref('chat');
+    firebaseData.provider().onAuthStateChanged(function(user) {
         chatRef.off();
         var setMessage = function(data){
-            console.log("set message called");
-            console.log(data.val());
-            
-            console.log($scope.messages);
-            $scope.$apply(function() {
-                $scope.messages.push(data.val());
-            });
+            $scope.messages.push(data.val());
+            $scope.$apply();
         }
 
         chatRef.limitToLast(12).on('child_added', setMessage);
         chatRef.limitToLast(12).on('child_changed', setMessage);
+    });
 
-
-        // var chatRef = firebaseData.database().ref("chat");
-        // // Create a Firechat instance
-        // var chat = new FirechatUI(chatRef, document.getElementById("wrapper-chat"));
-        // chat.setUser(user.uid, getUniqname(user.email));
-    // });
-
-
-
+    $scope.saveMessage = function() {
+        chatRef.push({
+            name: "Test name",
+            text: $scope.messageText
+        }).then(function() {
+            $scope.messageText = "";
+        });
+    }
 });
 
 
