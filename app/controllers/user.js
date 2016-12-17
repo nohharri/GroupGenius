@@ -19,10 +19,22 @@ angular.module('myApp.controllers.user', [])
 	// Grabs data from firebase like username and the groups they are in
 	$scope.getData = function()
 	{
-		var data = [];
 		$http.get('https://groupgenius-5953b.firebaseio.com/groups.json').success(function (response) {
-			console.log(response);
-			$scope.userData = response;
+			var key, pageData = {};
+			var userId =  firebase.auth().currentUser.uid;
+			// Create object of orgs with array of groups for each org
+			for (key in response)
+			{
+				if (response[key].members.indexOf(userId) != -1)
+				{
+						if (pageData[response[key].org]) // add another group to org
+							pageData[response[key].org].push(response[key]);
+						else // add first group to org
+							pageData[response[key].org] = [response[key]];
+				}
+			}
+			console.log(pageData);
+			$scope.pageData = pageData;
 		});
 	};
 
