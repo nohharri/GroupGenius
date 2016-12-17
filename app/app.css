@@ -30,3 +30,5 @@
 }
 
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+.profile-dropdown{ z-index:100; }
