@@ -24,7 +24,8 @@ angular.module('myApp.controllers.private', [])
         chatRef.off();
         var setMessage = function(data){
             $scope.messages.push(data.val());
-            $scope.$apply();
+            //Apply causing issues. Commented out for now and everything seems to be working okay.
+            // $scope.$apply();
         }
 
         chatRef.limitToLast(12).on('child_added', setMessage);
@@ -41,6 +42,7 @@ angular.module('myApp.controllers.private', [])
             text: $scope.messageText
         }).then(function() {
             $scope.messageText = "";
+            //This apply seems to be okay. Comment out if we're still getting errors.
             $scope.$apply();
         });
     }
@@ -59,20 +61,20 @@ angular.module('myApp.controllers.private', [])
     $scope.groupInfo = {};
 
     $scope.getGroupData = function()
-	{
-		$http.get('https://groupgenius-5953b.firebaseio.com/groups.json').success(function (response) 
+    {
+      $http.get('https://groupgenius-5953b.firebaseio.com/groups.json').success(function (response) 
+      {
+        var key;
+        for (key in response)
         {
-            var key;
-            for (key in response)
+            if (response[key].groupId == $scope.groupId)
             {
-                if (response[key].groupId == $scope.groupId)
-                {
-                    $scope.groupInfo = response[key];
-                    return;
-                }
+                $scope.groupInfo = response[key];
+                return;
             }
-		});
-	};
+        }
+    });
+  };
 });
 
 
