@@ -19,6 +19,8 @@ angular.module('myApp.controllers.signup', [])
 		password: ""
 	};
 
+	$scope.showSignUp = true;
+
 	$scope.signUp = function() {
 		//$scope.addUserToFirebase(this.firstName, this.last);
 		firebaseData.provider()
@@ -72,7 +74,6 @@ angular.module('myApp.controllers.signup', [])
 	$scope.toggleSignUp = function() {
 		$scope.showSignUp = !$scope.showSignUp;
 	}
-
 	var redirect = function(path) {
 		$location.path(path);
 	}

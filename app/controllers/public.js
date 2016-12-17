@@ -127,7 +127,7 @@ function writeNewPost(name, desc, spots, org, mustApprove) {
     spots: spots,
     mustApprove: mustApprove,
     org: org,
-	groupId: groupId
+	groupId: 0 // null at first
   };
 
   // Get a key for a new Post.
@@ -135,6 +135,7 @@ function writeNewPost(name, desc, spots, org, mustApprove) {
 
   // Write the new post's data simultaneously in the posts list and the user's post list.
   var updates = {};
+  newGroup['groupId'] = newPostKey; // update groupId
   //write the group to the group list
   updates['/groups/' + newPostKey] = newGroup;
  
