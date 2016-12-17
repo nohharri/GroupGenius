@@ -11,7 +11,8 @@
 			<div ng-if="showProfileSettings" class="profile-dropdown">
 				<div class="arrow-up"></div>
 				<div style="clear: both"></div>
-				<div ng-click="signOut()" class="profile-dropdown-elm clickable">Sign Out</div>
+				<a href="#/user"><div class="profile-dropdown-elm clickable" ng-click="toggleProfileSettings()">Profile</div></a>
+				<a href="#/landing"><div ng-click="signOut()" class="profile-dropdown-elm clickable">Sign Out</div></a>
 			</div>
 		</div>
 	</div>
