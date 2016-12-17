@@ -7,7 +7,8 @@ angular.module('myApp.controllers.private', [])
     $scope.isCollapsed = true;
     $scope.messages = [];
     $scope.messageText = "";
-    var digestExecuted = false;
+
+    $scope.groupId = 'KZ9a5HqDVn80zsXglLD';
 
     var firepadRef = firebaseData.database().ref();
     var codeMirror = CodeMirror(document.getElementById('wrapper-document'), { lineWrapping: true });
@@ -31,6 +32,10 @@ angular.module('myApp.controllers.private', [])
     });
 
     $scope.saveMessage = function() {
+        if(!$scope.messageText) {
+            return;
+        }
+
         chatRef.push({
             name: "Test name",
             text: $scope.messageText
