@@ -44,7 +44,8 @@ angular.module('myApp.controllers.public', [])
     		$scope.allGroups.push(group);
     	}
 		$scope.createUserHashMap();
-    	$scope.$apply();
+        //Apply causing issues. Commented out for now and everything seems to be working okay.
+    	// $scope.$apply();
     	//console.log($scope.allGroups);
 
 	});
