@@ -3,11 +3,17 @@ angular.module('myApp.controllers.public', [])
 
 // Homepage controller
 .controller('PublicCtrl', function($scope, $rootScope, firebaseData, headerService, $http) {
-  
   	$scope.allGroups = [];
 	$scope.selected = false;
     $scope.allGroupsRef = firebase.database().ref('groups');
+	$scope.clearForm = function(){
+		$scope.newName = "";
+		$scope.newDesc = "";
+		$scope.unlChecked = true;
+	}
 	$scope.userIDtoname = {};
+	$scope.nametoemail = {};
+	$scope.currEmails = [];
 	$scope.unlChecked = true;
 	$scope.createUserHashMap = function(){
 		$http({
@@ -16,6 +22,7 @@ angular.module('myApp.controllers.public', [])
 		}).then(function successCallback(response) {
 			for(var key in response.data){
 				$scope.userIDtoname[response.data[key].uid] = response.data[key].firstName + " " + response.data[key].lastName;
+				$scope.nametoemail[response.data[key].firstName + " " + response.data[key].lastName] = response.data[key].email;
 			}
 			for(var c = 0; c < $scope.allGroups.length; c++){
 				for(var d= 0; d < $scope.allGroups[c].members.length; ++d){
@@ -56,6 +63,7 @@ angular.module('myApp.controllers.public', [])
 			return true;
 		} return false;
 		}
+
      $scope.updateGroup = function(name, desc, members, spots) {
 	$scope.selected = true;
      	$scope.currentGroup = name;
