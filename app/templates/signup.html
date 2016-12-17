@@ -4,7 +4,6 @@
 			<h2>Sign Up</h2>
 			<hr>
 			<div>
-				{{firstName}}
 				<input ng-model="user.firstName" id="firstName"
 				type="text"
 				placeholder="First Name">
@@ -15,12 +14,12 @@
 				placeholder="Last Name">
 			</div>
 			<div>
-				<input ng-model="emailSignUp"
+				<input ng-model="user.email"
 				type="text"
 				placeholder="Email">
 			</div>
 			<div>
-				<input ng-model="passwordSignUp"
+				<input ng-model="user.password"
 				type="password"
 				placeholder="Password">
 			</div>

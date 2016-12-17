@@ -7,6 +7,7 @@ angular.module('myApp.controllers.private', [])
     $scope.isCollapsed = true;
     $scope.messages = [];
     $scope.messageText = "";
+    var digestExecuted = false;
 
     var firepadRef = firebaseData.database().ref();
     var codeMirror = CodeMirror(document.getElementById('wrapper-document'), { lineWrapping: true });
@@ -35,6 +36,7 @@ angular.module('myApp.controllers.private', [])
             text: $scope.messageText
         }).then(function() {
             $scope.messageText = "";
+            $scope.$apply();
         });
     }
 });

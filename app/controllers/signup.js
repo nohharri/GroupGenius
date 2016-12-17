@@ -14,16 +14,18 @@ angular.module('myApp.controllers.signup', [])
 	$scope.firstName = "";
 	$scope.user = {
 		firstName: "",
-		lastName: ""
+		lastName: "",
+		email: "",
+		password: ""
 	};
 
 	$scope.signUp = function() {
 		//$scope.addUserToFirebase(this.firstName, this.last);
 		firebaseData.provider()
-			.createUserWithEmailAndPassword(this.emailSignUp, this.passwordSignUp)
+			.createUserWithEmailAndPassword($scope.user.email, $scope.user.password)
 			.then(function() {
 				console.log("user signed up.");
-				$scope.addUserToFirebase($scope.user.firstName);
+				$scope.addUserToFirebase($scope.user);
 
 				$scope.$apply(function() {
 					redirect('/user');	
@@ -74,21 +76,13 @@ angular.module('myApp.controllers.signup', [])
 	var redirect = function(path) {
 		$location.path(path);
 	}
-	$scope.addUserToFirebase = function(firstName) {
-		console.log("adding a user");
-
-		
-		console.log(firstName);
-		console.log(this.lastName);
-
-					
-
+	$scope.addUserToFirebase = function(user) {
 	  // A post entry.
 	  var newUser = {
-	    firstName: $scope.firstName, 
-	    lastName: $scope.lastName,
+	    firstName: user.firstName, 
+	    lastName: user.lastName,
 	    uid: firebase.auth().currentUser.uid,
-	    email: $scope.emailSignUp
+	    email: user.email
 								  
 	  };
 
