@@ -3,7 +3,7 @@
 angular.module('myApp.controllers.private', [])
 
 // Homepage controller
-.controller('PrivateCtrl', function($scope, $rootScope, firebaseData) {
+.controller('PrivateCtrl', function($scope, $rootScope, firebaseData, $location, $http) {
     $scope.isCollapsed = true;
     $scope.messages = [];
     $scope.messageText = "";
@@ -39,6 +39,35 @@ angular.module('myApp.controllers.private', [])
             $scope.$apply();
         });
     }
+
+    $scope.location = $location;
+    // Gets groupId from the url
+    $scope.$watch('location.search()', function() {
+        $scope.groupId = ($location.search()).groupId; 
+        // Get group data from groupId
+        
+    }, true);
+    // Changes groupId in the url
+    $scope.changeTarget = function(name) {
+        $location.search('groupId', name);
+    }
+    $scope.groupInfo = {};
+
+    $scope.getGroupData = function()
+	{
+		$http.get('https://groupgenius-5953b.firebaseio.com/groups.json').success(function (response) 
+        {
+            var key;
+            for (key in response)
+            {
+                if (response[key].groupId == $scope.groupId)
+                {
+                    $scope.groupInfo = response[key];
+                    return;
+                }
+            }
+		});
+	};
 });
 
 

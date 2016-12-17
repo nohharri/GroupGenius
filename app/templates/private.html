@@ -2,9 +2,9 @@
 <div id="wrapper-private" class="private">
 	
 
-	<div id="group-info">
+	<div id="group-info" ng-init="getGroupData()">
 		<div id="group-name">
-			<a href="#">yomama'shouse</a>
+			<h2>{{groupInfo.name}}</h2>
 		</div>
 		<div id="group-status">
 			<div id="group-activeStatus" class="">
