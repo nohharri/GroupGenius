@@ -42,7 +42,10 @@ angular.module('myApp.controllers.public', [])
 	$scope.selected = true;
      	$scope.currentGroup = name;
      	$scope.currentMembers = 'Current Members: ' + $scope.formatMembers(members);
-     	$scope.openSpots = 'Open Spots: ' + spots;
+	if(spots == -1){
+	} else {
+     		$scope.openSpots = 'Open Spots: ' + spots;
+	}
      	$scope.desc = 'Description: ' + desc;
      };
 	$scope.selCls = function(clas) {
