@@ -56,7 +56,7 @@ angular.module('myApp', [
 
 // Global app controller
 .controller('appCtrl', function($scope, $rootScope, firebaseData, headerService) {
-    $scope.isAuthenticated = true;
+    $rootScope.isAuthenticated = true;
     $scope.showProfileSettings = false;
     $scope.headerUsername = "Guest"
 
@@ -65,10 +65,10 @@ angular.module('myApp', [
         if(user){
             //We have a user
             $scope.headerUsername = user.email;
-            $scope.isAuthenticated = true;
+            $rootScope.isAuthenticated = true;
         }else{
             $scope.headerUsername = "Guest";
-            $scope.isAuthenticated = false;
+            $rootScope.isAuthenticated = false;
 
         }
 
