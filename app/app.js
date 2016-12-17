@@ -66,7 +66,6 @@ angular.module('myApp', [
             //We have a user
             $scope.headerUsername = user.email;
             $scope.isAuthenticated = true;
-
         }else{
             $scope.headerUsername = "Guest";
             $scope.isAuthenticated = false;
@@ -83,6 +82,7 @@ angular.module('myApp', [
         firebaseData.provider()
         .signOut().then(function() {
           console.log('Signed Out');
+          $scope.showProfileSettings = false;
       }, function(error) {
           console.error('Sign Out Error', error);
       });
