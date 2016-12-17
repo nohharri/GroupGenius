@@ -5,6 +5,7 @@ angular.module('myApp.controllers.public', [])
 .controller('PublicCtrl', function($scope, $rootScope, firebaseData, headerService, $http) {
   
   	$scope.allGroups = [];
+	$scope.selected = false;
     $scope.allGroupsRef = firebase.database().ref('groups');
 
     //event listener that updates when groups are added to the database
@@ -23,10 +24,11 @@ angular.module('myApp.controllers.public', [])
 
 	});
 	$scope.classes = [];
+	
 	$scope.getClasses = function()
 	{
 		$http.get('https://groupgenius-5953b.firebaseio.com/organizations.json').success(
-			function (response) { $scope.classes  = response;});
+			function (response) { $scope.classes  = response; $scope.currentClass = $scope.classes[0]});
 	}
 	$scope.getClasses();
 	$scope.currentClass = $scope.classes[0];
@@ -37,6 +39,7 @@ angular.module('myApp.controllers.public', [])
 		} return false;
 		}
      $scope.updateGroup = function(name, desc, members, spots) {
+	$scope.selected = true;
      	$scope.currentGroup = name;
      	$scope.currentMembers = 'Current Members: ' + $scope.formatMembers(members);
      	$scope.openSpots = 'Open Spots: ' + spots;

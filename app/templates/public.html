@@ -45,7 +45,15 @@
 
 	<!-- specific group -->
 	<div class="col-md-7" id="search-pane" style="margin: 10px;height: 70vh; overflow-y: auto">
-		<div class="well">
+		<div class="well" style="background: #3366ff; height: 70%" ng-hide="selected" style="height:300px">
+		<div style="position: relative; top: 50%; transform: translateY(-50%);">
+		<center>
+			<img src="static/img/logo_long_white_100x373.png" height=100%/>
+			<h2 style="color: #e6ecff">Select a Group to Begin</h2>
+		</center>
+		</div>
+		</div>
+		<div class="well" ng-show="selected">
 		<h2 ng-bind="currentGroup" style="text-align: center;">Select A Group!</h2>
 		<br>
 		<p ng-bind="currentMembers"></p>
