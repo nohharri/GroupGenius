@@ -103,6 +103,15 @@ function writeNewPost(name, desc, spots, org, mustApprove) {
 	//add the creator of the group to the members
 	members.push(firebase.auth().currentUser.uid);
 
+	// Generate group id (new groupId = number of groups + 1)
+	var groupId = 0;
+	$.ajax({
+		dataType: 'JSON',
+		url: 'https://groupgenius-5953b.firebaseio.com/groups.json',
+		success: function(resp) {groupId = Object.keys(resp).length + 1},
+		async: false // need to wait for response
+	});
+	
   // A post entry.
   var newGroup = {
     name: name,
@@ -110,7 +119,8 @@ function writeNewPost(name, desc, spots, org, mustApprove) {
     members: members,
     spots: spots,
     mustApprove: mustApprove,
-    org: org
+    org: org,
+	groupId: groupId
   };
 
   // Get a key for a new Post.

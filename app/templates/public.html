@@ -76,10 +76,8 @@
 		      	<div>
 		        	<h3 style="display:inline-block;">Organization: </h3>
 		        	<div style="display:inline-block;">
-					  <select id="orgSelect">
-						  <option>EECS 482</option>
-						  <option>EECS 485</option>
-						  
+					  <select id="orgSelect" >
+						  <option ng-repeat="class in classes">{{class}}</option>
 						</select>
 					</div>
 		        </div>
