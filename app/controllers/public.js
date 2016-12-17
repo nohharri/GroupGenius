@@ -12,7 +12,7 @@ angular.module('myApp.controllers.public', [])
     	console.log("groups updated");
     	console.log(snapshot.val());
     	var groupObj = snapshot.val();
-
+	$scope.allGroups = [];
     	for( var key in groupObj) {
     		var group = groupObj[key];
     		group.groupid = key;
