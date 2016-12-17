@@ -7,7 +7,23 @@ angular.module('myApp.controllers.public', [])
   	$scope.allGroups = [];
 	$scope.selected = false;
     $scope.allGroupsRef = firebase.database().ref('groups');
-
+	$scope.userIDtoname = {};
+	$scope.createUserHashMap = function(){
+		$http({
+			method: 'GET',
+			url: 'https://groupgenius-5953b.firebaseio.com/users.json'
+		}).then(function successCallback(response) {
+			for(var key in response.data){
+				$scope.userIDtoname[response.data[key].uid] = response.data[key].firstName + " " + response.data[key].lastName;
+			}
+			for(var c = 0; c < $scope.allGroups.length; c++){
+				for(var d= 0; d < $scope.allGroups[c].members.length; ++d){
+				
+					$scope.allGroups[c].members[d] = $scope.userIDtoname[$scope.allGroups[c].members[d]];
+				}
+			}
+		});
+	}
     //event listener that updates when groups are added to the database
     $scope.allGroupsRef.on('value', function(snapshot) {
     	console.log("groups updated");
@@ -19,8 +35,9 @@ angular.module('myApp.controllers.public', [])
     		group.groupid = key;
     		$scope.allGroups.push(group);
     	}
+		$scope.createUserHashMap();
     	$scope.$apply();
-    	console.log($scope.allGroups);
+    	//console.log($scope.allGroups);
 
 	});
 	$scope.classes = [];
@@ -43,6 +60,7 @@ angular.module('myApp.controllers.public', [])
      	$scope.currentGroup = name;
      	$scope.currentMembers = 'Current Members: ' + $scope.formatMembers(members);
 	if(spots == -1){
+		$scope.openSpots = 'Open Spots: Unlimited';
 	} else {
      		$scope.openSpots = 'Open Spots: ' + spots;
 	}

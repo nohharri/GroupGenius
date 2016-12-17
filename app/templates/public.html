@@ -27,7 +27,7 @@
 			<ul class="list-group">
 			  <li ng-repeat="group in allGroups | filter:searchText" class="list-group-item" ng-click="updateGroup(group.name, group.desc, group.members, group.spots);" ng-if="isActiveClass(group.org)">
 				
-			  	<h3>{{group.name}}</h3>
+			  	<h3 style="background-color: white">{{group.name}}</h3>
 			  	<p>{{formatMembers(group.members) | limitTo: 50}}{{formatMembers(group.members).length > 50 ? ' ...' : ''}}</p>
 			  	<p>{{group.desc | limitTo: 50}}{{group.desc.length > 20 ? ' ...' : ''}}</p>
 			  </li>
@@ -55,14 +55,14 @@
 		</div>
 		<div class="well" ng-show="selected">
 		<h2 ng-bind="currentGroup" style="text-align: center;">Select A Group!</h2>
-		<br>
+		<hr />
+		
 		<p ng-bind="currentMembers"></p>
-		<br>
-		<div ng-bind-html="openSpots"></div>
 		<br>
 		<p ng-bind="desc"></p>
 		<br>
-		<button style="display: block;margin: auto; text-align: center;"type="button" class="btn btn-success">Join this Group</button>
+		<button style="display: block;margin: auto; text-align: center; font-size: 20px"type="button" class="btn btn-success">Join this Group</button>
+		<center><div ng-bind="openSpots" style="font-size: 11px; padding-top: 10px"></div></center>
 		<br>
 		</div>
 	</div>
