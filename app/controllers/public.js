@@ -8,6 +8,7 @@ angular.module('myApp.controllers.public', [])
 	$scope.selected = false;
     $scope.allGroupsRef = firebase.database().ref('groups');
 	$scope.userIDtoname = {};
+	$scope.unlChecked = true;
 	$scope.createUserHashMap = function(){
 		$http({
 			method: 'GET',
@@ -58,13 +59,13 @@ angular.module('myApp.controllers.public', [])
      $scope.updateGroup = function(name, desc, members, spots) {
 	$scope.selected = true;
      	$scope.currentGroup = name;
-     	$scope.currentMembers = 'Current Members: ' + $scope.formatMembers(members);
+     	$scope.currentMembers = $scope.formatMembers(members);
 	if(spots == -1){
 		$scope.openSpots = 'Open Spots: Unlimited';
 	} else {
      		$scope.openSpots = 'Open Spots: ' + spots;
 	}
-     	$scope.desc = 'Description: ' + desc;
+     	$scope.desc = desc;
      };
 	$scope.selCls = function(clas) {
 		$scope.currentClass = clas;
@@ -92,7 +93,7 @@ angular.module('myApp.controllers.public', [])
 		}
 
 		var numSpots = 0;
-		if($("#limitSelect").val() == "no limit") {
+		if($scope.unlChecked) {
 			numSpots = -1;
 		} else {
 			numSpots = $("#limitSelect").val();

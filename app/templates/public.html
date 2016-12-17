@@ -1,21 +1,25 @@
 <!-- Public Messaging Screen -->
-
-<div class="row" id="public-messaging-screen" style="padding: 40px;">
+<style>
+.well{
+background-color: white;
+}
+</style>
+<div class="row" id="public-messaging-screen" style="padding-left: 40px; padding-right: 40px; padding-top: 20px; padding-bottom: 20px; margin: 0px">
 	<!-- group list -->
 
 	<div class="col-md-4" id="search-pane" style=" margin: 10px">
 		
 		<!-- Org Dropdown -->
 		<div class="dropdown" style="display: block;margin: auto; text-align: center;">
-			<button class="btn btn-primary dropdown-toggle" style="width: 100%; font-size: 20px" type="button" data-toggle="dropdown">{{currentClass}} <span class="caret"></span></button>
+			<button class="btn btn-primary dropdown-toggle" style="padding-bottom: 0px; width: 100%; font-size: 20px" type="button" data-toggle="dropdown">{{currentClass}} <br /><span class="glyphicon glyphicon-chevron-down"></span></button>
 			<ul class="dropdown-menu" style="width: 100%">
-				<li ng-repeat="class in classes" style="width: 100%; font-size: 18px">
+				<a ng-repeat="class in classes" style="width: 100%; font-size: 18px">
 <center>
-					<a ng-click="selCls(class)">
+					<li ng-click="selCls(class)" style="width: 100%">
 					{{class}}
-					</a>
+					</li>
 </center>
-				</li>
+				</a>
 			</ul>
 		</div>
 
@@ -36,7 +40,7 @@
 
 <center>
 		<div style="padding: 10px;">
-			<button type="button" class="btn  btn-success btn-lg" data-toggle="modal" data-target="#myModal">Create New Group</button>
+			<button type="button" style="width: 100%;" class="btn  btn-success btn-lg" data-toggle="modal" data-target="#myModal">Create New Group</button>
 		</div>
 </center>
 	</div>
@@ -54,14 +58,18 @@
 		</div>
 		</div>
 		<div class="well" ng-show="selected">
-		<h2 ng-bind="currentGroup" style="text-align: center;">Select A Group!</h2>
+		<h1 ng-bind="currentGroup" style="text-align: center;">Select A Group!</h1>
+		<center>
+		<h4 ng-bind="currentMembers"></h4>
+		</center>
 		<hr />
-		
-		<p ng-bind="currentMembers"></p>
 		<br>
-		<p ng-bind="desc"></p>
-		<br>
-		<button style="display: block;margin: auto; text-align: center; font-size: 20px"type="button" class="btn btn-success">Join this Group</button>
+		<center>
+		<p><b>Description</b></p>
+		<p style="padding-bottom: 20px" ng-bind="desc"></p>
+		</center>
+		<hr />
+		<button style="display: block;margin: auto; text-align: center; font-size: 20px; width: 60%"type="button" class="btn btn-success">Join this Group</button>
 		<center><div ng-bind="openSpots" style="font-size: 11px; padding-top: 10px"></div></center>
 		<br>
 		</div>
@@ -104,22 +112,12 @@
 		        	<h3>Approve All Members <input type="checkbox" id="approveCheckBox"></h3>
 		      	<!-- num members -->
 		      	<div>
+				<h3 style="display:inline-block;">Unlimited Members</h3>
+					<input type="checkbox" ng-click="unl()" ng-model="unlChecked">
+				<div ng-hide="unlChecked">
 		      		<h3 style="display:inline-block;">Members Limit: </h3>
-		      		<div style="display:inline-block;" class="dropdown">
-					  
-					  <select id="limitSelect">
-						  <option>no limit</option>
-						  <option>1</option>
-						  <option>2</option>
-						  <option>3</option>
-						  <option>4</option>
-						  <option>5</option>
-						  <option>6</option>
-						  <option>7</option>
-						  <option>8</option>
-						  <option>9</option>
-						  <option>10</option>
-						</select>
+					  <input id="limitSelect" type="number" min="0" step="1"/>
+				</div>
 					</div>
 					
 		      	</div>
