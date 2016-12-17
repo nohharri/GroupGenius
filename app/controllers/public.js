@@ -75,7 +75,9 @@ angular.module('myApp.controllers.public', [])
 		}
 
 
+		$scope.currentClass = document.getElementById("orgSelect").value;
 		writeNewPost($scope.newName, $scope.newDesc, numSpots, document.getElementById("orgSelect").value, $("#approveCheckBox").val());
+
 	}
     
 });
@@ -102,7 +104,7 @@ function writeNewPost(name, desc, spots, org, mustApprove) {
 	var members = [];
 	//add the creator of the group to the members
 	members.push(firebase.auth().currentUser.uid);
-
+	
 	// Generate group id (new groupId = number of groups + 1)
 	var groupId = 0;
 	$.ajax({
@@ -111,7 +113,6 @@ function writeNewPost(name, desc, spots, org, mustApprove) {
 		success: function(resp) {groupId = Object.keys(resp).length + 1},
 		async: false // need to wait for response
 	});
-	
   // A post entry.
   var newGroup = {
     name: name,

@@ -23,7 +23,7 @@
 		
 
 
-		<div style="margin: 10px; width: 100%; height: 65vh; overflow-y: auto;">
+		<div style="margin: 10px; width: 95%; height: calc(100vh - 350px); overflow-y: auto;">
 			<ul class="list-group">
 			  <li ng-repeat="group in allGroups | filter:searchText" class="list-group-item" ng-click="updateGroup(group.name, group.desc, group.members, group.spots);" ng-if="isActiveClass(group.org)">
 				
