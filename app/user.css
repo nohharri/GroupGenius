@@ -1,0 +1,32 @@
+.caret
+{
+	cursor: pointer;
+	padding: 2px;
+}
+#wrapper-user
+{
+	position: relative;
+	height: calc(100vh - 70px);
+	width: 100%;
+}
+.user.row
+{
+	height: 100%;
+	width: 100%;
+}
+
+#wrapper-sidebar
+{
+	height: 100%;
+	background-color: #e0e0e0;
+}
+
+#wrapper-main
+{
+
+}
+
+.wrapper-group
+{
+	border: 1px solid black;
+}
