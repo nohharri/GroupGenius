@@ -16,7 +16,8 @@ angular.module('myApp.controllers.public', [])
 	$scope.currEmails = [];
 	$scope.unlChecked = true;
 	$scope.groupId;
-
+	$scope.currPending = false;
+	$scope.currMember = false;
 	$scope.createUserHashMap = function(){
 		$http({
 			method: 'GET',
@@ -124,7 +125,7 @@ angular.module('myApp.controllers.public', [])
 		}
 		return s;
 	}
-
+	$scope.approveCheckBox = false;
 	$scope.createNewGroup = function() {
 		console.log("create new group");
 		if(!$scope.newName || !$scope.newDesc) {
@@ -139,9 +140,12 @@ angular.module('myApp.controllers.public', [])
 			numSpots = $("#limitSelect").val();
 		}
 
-
+		var killme = "on";
+		if(!$scope.approveCheckBox){
+			killme = "off";
+		}
 		$scope.currentClass = document.getElementById("orgSelect").value;
-		$scope.writeNewPost($scope.newName, $scope.newDesc, numSpots, document.getElementById("orgSelect").value, $("#approveCheckBox").val());
+		$scope.writeNewPost($scope.newName, $scope.newDesc, numSpots, document.getElementById("orgSelect").value, killme);
 
 	}
 	$scope.isCurClass = function(clas){
