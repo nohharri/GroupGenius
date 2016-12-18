@@ -10,6 +10,7 @@ angular.module('myApp.controllers.private', [])
     $scope.messageText = "";
     $scope.chats = [];
 
+    var firepadRef = firebaseData.database().ref('/docs/' + $scope.groupId + '/');
 
 
     // Initialize chats
@@ -36,7 +37,6 @@ firebaseData.provider().onAuthStateChanged(function(user) {
     var userId = user.uid;
 
         //firepad stuff
-        var firepadRef = firebaseData.database().ref('/docs/' + $scope.groupId + '/');
         var codeMirror = CodeMirror(document.getElementById('wrapper-document'), { lineWrapping: true });
         var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
             richTextShortcuts: true,
