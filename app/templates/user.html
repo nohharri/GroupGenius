@@ -48,7 +48,8 @@
 									<div class="group-notification-icon-small"></div>
 									{{ notif[0] }} - {{ notif[1] }}
 									<!--<div ng-if="notif[0]=='joinRequest'">-->
-									<button ng-click="approve(group.groupId, notif[2]); showNotif = ! showNotif">Approve</button>
+									<button ng-click="approveOrDeny(group.groupId, notif[2], 'approve'); showNotif = ! showNotif">Approve</button>
+									<button ng-click="approveOrDeny(group.groupId, notif[2], 'deny'); showNotif = ! showNotif">Deny</button>
 								</div>
 							</div> <!-- END expanded notifications -->
 

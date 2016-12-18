@@ -49,13 +49,14 @@ angular.module('myApp.controllers.user', [])
 		
 	};
 
-	$scope.approve = function(groupId, userId)
+	$scope.approveOrDeny = function(groupId, userId, type)
 	{
-		// add to members
-		firebase.database().ref().child('/groups/' + groupId + '/members').push(userId);
+		if (type == 'approve')	// add to members
+			firebase.database().ref().child('/groups/' + groupId + '/members').push(userId);
 		// remove from joinRequest
 		firebase.database().ref().child('/groups/' + groupId + '/notifications/joinRequest/' + userId).remove();
 	}
+
 
 	$scope.parseNotifications = function(rawNotifications)
 	{
