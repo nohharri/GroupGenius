@@ -49,6 +49,14 @@ angular.module('myApp.controllers.user', [])
 		
 	};
 
+	$scope.approve = function(groupId, userId)
+	{
+		// add to members
+		firebase.database().ref().child('/groups/' + groupId + '/members').push(userId);
+		// remove from joinRequest
+		firebase.database().ref().child('/groups/' + groupId + '/notifications/joinRequest/' + userId).remove();
+	}
+
 	$scope.parseNotifications = function(rawNotifications)
 	{
 			var logs = [];
@@ -64,7 +72,7 @@ angular.module('myApp.controllers.user', [])
 		for (var notifType in raw)
 		{
 			for (var notif in raw[notifType])
-				notification.push([notifType, raw[notifType][notif]])
+				notification.push([notifType, raw[notifType][notif], notif]) //ex: joinRequest, 'mav asked to join', userId
 		}
 		return notification;
 	}

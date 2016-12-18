@@ -44,9 +44,11 @@
 							<span class="caret" data-target="#{{org}}-{{group.groupId}}-notifications" data-toggle="collapse"></span>
 							<div id="{{org}}-{{group.groupId}}-notifications" class="wrapper-group-notification-details collapse" ng-init="notifications = parseAllNotifications(group.notifications)">
 								<!-- ng-repeat for notifications -->
-								<div class="group-notification-detail" ng-repeat="notif in notifications">
+								<div class="group-notification-detail" ng-repeat="notif in notifications" ng-hide="showNotif">
 									<div class="group-notification-icon-small"></div>
 									{{ notif[0] }} - {{ notif[1] }}
+									<!--<div ng-if="notif[0]=='joinRequest'">-->
+									<button ng-click="approve(group.groupId, notif[2]); showNotif = ! showNotif">Approve</button>
 								</div>
 							</div> <!-- END expanded notifications -->
 
