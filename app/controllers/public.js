@@ -196,8 +196,8 @@ angular.module('myApp.controllers.public', [])
 	  // Create default chat
 	  var chatRef = firebase.database().ref('/chat/' + newPostKey);
 	  var keyName = chatRef.push({
-	  	name: 'Chatbot',
-	  	text: 'Welcome to the stream!'
+	  	name: 'GeniusBot',
+	  	text: 'Welcome to the chat! Type something in the chat to get started.'
 	  });
 
 	  // Write the new post's data simultaneously in the posts list and the user's post list.
