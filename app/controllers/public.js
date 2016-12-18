@@ -224,6 +224,7 @@ angular.module('myApp.controllers.public', [])
 			
 			updateNotif['/groups/' + $scope.groupId + '/notifications/joinRequest/' + newKey] = username + " asked to join the group";
 			firebase.database().ref().update(updateNotif);
+			$scope.currPending = true; // make request pending btn show up
 		}
 
 		else // add and take to private group
