@@ -228,21 +228,6 @@ angular.module('myApp.controllers.public', [])
 			firebase.database().ref().update(update);
 			window.location.href = '/app/#/private?groupId=' + $scope.groupId;	
 		}
-		$scope.currPending = false;
-		if(noti != null && noti.joinRequest != null){
-			for(var key in noti.joinRequest){
-				if(key == firebase.auth().currentUser.uid){
-					$scope.currPending = true;
-				}
-			}
-		}		
-		$scope.currMember = false;
-		for(var c = 0; c < members.length; c++){
-			if(members[c] == $scope.userIDtoname[firebase.auth().currentUser.uid]){
-				$scope.currMember = true;
-				$scope.currPending = false;
-			}
-		}
 	}
     
 });
