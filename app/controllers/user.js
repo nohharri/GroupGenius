@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.controllers.user', [])
+angular.module('myApp.controllers.user', ['ngAnimate'])
 
 // Homepage controller
 .controller('UserCtrl', function($scope, $rootScope, firebaseData, $http) {
@@ -69,15 +69,17 @@ angular.module('myApp.controllers.user', [])
 		var group = $scope.pageData[orgId][groupKey];
 		var userKey;
 
+		var count = 0;
 		for (var memb in group['members']) //loop through memebers to get key of user
 		{
 			if (group['members'][memb] == curUser)
-			{ 
 				userKey = memb;
-				break;
-			}
+			count++;
 		}
-		firebase.database().ref().child('/groups/' + groupId + '/members/' + userKey).remove();		
+		if (count <= 1) //only one member left, delete group
+				firebase.database().ref().child('/groups/' + groupId).remove();		
+		else
+			firebase.database().ref().child('/groups/' + groupId + '/members/' + userKey).remove();		
 	}
 
 

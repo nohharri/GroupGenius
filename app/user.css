@@ -72,3 +72,19 @@
 	right: 0;
 	bottom: 0;
 }
+
+.balls
+{
+	background-color: blue;
+	transition: 1s;
+	width: 500px;
+}
+
+.remove-group {
+	height: 0;
+	width: 0;
+	background-color: transparent;
+	top:-200px;
+	left: 200px;
+	transition: 1s ease;
+}
