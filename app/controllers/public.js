@@ -203,9 +203,8 @@ angular.module('myApp.controllers.public', [])
 		else // add and take to private group
 		{
 			var update = {};
-			var newKey = userId;
 				
-			update['/groups/' + $scope.groupId + '/members/' + newKey] = userId + " joined the group";
+			update['/groups/' + $scope.groupId + '/members/'] = userId + " joined the group";
 			firebase.database().ref().update(update);
 			window.location.href = '/app/#/private?groupId=' + $scope.groupId;	
 		}
