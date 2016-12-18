@@ -44,6 +44,12 @@
 	width: calc(50% - 50px) !important;
 }
 
+.wrapper-group-notification
+{
+	margin-top: 15px;
+	margin-bottom: 20px;
+}
+
 .quicklink { cursor: pointer; }
 
 .chev-org
