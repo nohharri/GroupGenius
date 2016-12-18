@@ -1,11 +1,11 @@
 <!-- Private Messaging Screen -->
 <div id="wrapper-private" class="private">
 	<div id="group-info">
-		<div id="group-name">
-			<h2>{{ groupInfo.name }}</h2>
+		<div id="group-name"><center>
+			<h1>{{ groupInfo.name }}</h1></center>
 		</div>
 		<div id="group-status">
-			<div id="group-activeStatus" class="">
+			<div id="group-activeStatus">
 
 			</div>
 
@@ -24,13 +24,13 @@
 			</div>
 			<div class="message-box">
 				<hr>
+
 				<input class="user-message" ng-model="messageText" type="text">
 				<button ng-click="saveMessage()" class="btn btn-primary user-message-send">Send</button>
 			</div>
 		</div><!-- END #wrapper-chat -->
 
-		<div id="wrapper-document" class="col-md-4">
-			document
+		<div id="wrapper-document" class="col-md-8 well" style="padding-top: 0px">
 		</div><!-- END #wrapper-document -->
 	</div><!-- END #wrapper-content -->
 </div> <!-- END #wrapper-private -->

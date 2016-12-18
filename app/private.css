@@ -5,17 +5,50 @@
 
 .private #group-info
 {
-    height: 200px;
+}
+
+#chat-area{
+	height: calc(100% - 70px);
 }
 
 .private #wrapper-content
 {
-    height: calc(100% - 200px);
+    height: calc(100vh - 200px);
+}
+
+
+.private #wrapper-chat
+{
+    height: 100%;
 }
 
 .private #wrapper-document
 {
-    height: 500px;
+    height: 92%;
+}
+
+.firepad-userlist{
+	background-color: #3366ff;
+	color: white;
+}
+
+.firepad-userlist-heading{
+	text-align: right;
+	padding-right: 20px;
+}
+
+.firepad-userlist-user{
+	float: right;
+	display: inline-block;
+	padding: 5px;
+	background-color: white;
+	border-radius: 10px;
+	height: 50px;
+	width: 80px;
+	color: black;
+  text-align: center;
+	line-height: 40px;
+	overflow: hidden;
 }
 
 
