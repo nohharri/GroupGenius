@@ -106,7 +106,7 @@ background-color: white;
 		        	<h3 style="display:inline-block;">Organization: </h3>
 		        	<div style="display:inline-block;">
 					  <select id="orgSelect" >
-						  <option ng-repeat="class in classes" ng-selected="class=currentClass">{{class}}</option>
+						  <option ng-repeat="class in classes" ng-selected="isCurClass(class)">{{class}}</option>
 						</select>
 					</div>
 		        </div>

@@ -143,7 +143,9 @@ angular.module('myApp.controllers.public', [])
 		$scope.writeNewPost($scope.newName, $scope.newDesc, numSpots, document.getElementById("orgSelect").value, $("#approveCheckBox").val());
 
 	}
-
+	$scope.isCurClass = function(clas){
+		if(clas == $scope.currentClass){ return true; } else { return false }
+	}
 	$scope.writeNewPost = function(name, desc, spots, org, mustApprove) {
 
 		console.log("writing a new post");
