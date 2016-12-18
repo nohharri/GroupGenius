@@ -128,13 +128,11 @@ background-color: white;
 		        </div>
 		        <!-- organization -->
 		        	<h3>Approve All Members</h3><input type="checkbox" ng-model="approveCheckBox">
-		      	<!-- num members -->
 		      	<div>
-				<h3 style="display:inline-block;">Unlimited Members</h3>
-					<input type="checkbox" ng-click="unl()" ng-model="unlChecked">
-				<div ng-hide="unlChecked">
+				<div>
+					<!-- num members -->
 		      		<h3 style="display:inline-block;">Members Limit: </h3>
-					  <input id="limitSelect" type="number" min="0" step="1"/>
+					  <input id="limitSelect" type="number" min="0" max="100" step="1"/>
 				</div>
 					</div>
 					
