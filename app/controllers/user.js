@@ -25,7 +25,7 @@ angular.module('myApp.controllers.user', [])
 			// Create object of orgs with array of groups for each org
 			for (key in response)
 			{
-				if (response[key].members.indexOf(userId) != -1)
+				if ($scope.search(response[key].members, userId) != false)
 				{
 						if (pageData[response[key].org]) // add another group to org
 							pageData[response[key].org].push(response[key]);
@@ -50,5 +50,15 @@ angular.module('myApp.controllers.user', [])
 		
 	};
 
+	// function for searching data for value. returns false if nothing found, else returns the key
+	$scope.search = function(arr, target) { 
+		var key;
+		for (key in arr)
+		{
+			if (arr[key] == target)
+				return key;
+		}
+		return false;
+	};
 });
 
