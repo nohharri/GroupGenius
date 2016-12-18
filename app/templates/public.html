@@ -27,7 +27,7 @@ background-color: white;
 
 		<div style="margin: 10px; width: 95%; height: calc(100vh - 350px); overflow-y: auto;">
 			<ul class="list-group">
-			  <li ng-repeat="group in allGroups | filter:searchText" class="list-group-item" ng-click="updateGroup(group.groupId, group.name, group.desc, group.members, group.spots);" ng-if="isActiveClass(group.org)">
+			  <li ng-repeat="group in allGroups | filter:searchText" class="list-group-item" ng-click="updateGroup(group.groupId, group.name, group.desc, group.members, group.spots, group.comments);" ng-if="isActiveClass(group.org)">
 				
 			  	<h3 style="background-color: white">{{group.name}}</h3>
 			  	<p>{{formatMembers(group.members) | limitTo: 50}}{{formatMembers(group.members).length > 50 ? ' ...' : ''}}</p>
@@ -71,6 +71,21 @@ background-color: white;
 		<center><div ng-bind="openSpots" style="font-size: 11px; padding-top: 10px"></div></center>
 		<br>
 		</div>
+
+		<!-- chat -->
+		<div ng-show="selected">
+			<h4>Comments</h4>
+			<div>
+				<div class="well" ng-repeat="comment in currentComments">
+					<b>{{comment.name}}</b>
+					<p>{{comment.comment}}</b>
+				</div>
+			</div>
+			<div>
+				<input type="text" ng-model="userComment"/>
+				<button type="button" class="warning" ng-click="postCmt()">Post</button>
+			</div>
+		</div>
 	</div>
 
 	<!-- Modal -->
@@ -91,7 +106,7 @@ background-color: white;
 		        	<h3 style="display:inline-block;">Organization: </h3>
 		        	<div style="display:inline-block;">
 					  <select id="orgSelect" >
-						  <option ng-repeat="class in classes">{{class}}</option>
+						  <option ng-repeat="class in classes" ng-selected="isCurClass(class)">{{class}}</option>
 						</select>
 					</div>
 		        </div>

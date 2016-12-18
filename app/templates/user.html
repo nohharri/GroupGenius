@@ -15,7 +15,9 @@
 		
 			<a href="#/public"><button>Look for a group!</button></a>
 
-	
+			<div>
+				<p ng-repeat="p in pendingGroups">{{ p.org }} - {{ p.name }}</p>
+			</div>
 			<div id="{{org}}" class="wrapper-organization" ng-repeat="(org, groups) in pageData">
 				<h2>{{org}}</h2>
 				<span class="caret" data-target="#{{org}}Content" data-toggle="collapse"></span>
@@ -41,9 +43,9 @@
 							<span class="caret" data-target="#{{org}}-{{group.groupId}}-notifications" data-toggle="collapse"></span>
 							<div id="{{org}}-{{group.groupId}}-notifications" class="wrapper-group-notification-details collapse">
 								<!-- ng-repeat for notifications -->
-								<div class="group-notification-detail">
+								<div class="group-notification-detail" ng-repeat="(notifType, notifVal) in group.notifications">
 									<div class="group-notification-icon-small"></div>
-									Stali changed the group name
+									{{notifType}} - {{notifVal}}
 								</div>
 							</div> <!-- END expanded notifications -->
 
