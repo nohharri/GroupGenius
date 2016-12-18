@@ -27,7 +27,7 @@ background-color: white;
 
 		<div style="margin: 10px; width: 95%; height: calc(100vh - 350px); overflow-y: auto;">
 			<ul class="list-group">
-			  <li ng-repeat="group in allGroups | filter:searchText" class="list-group-item" ng-click="updateGroup(group.groupId, group.name, group.desc, group.members, group.spots);" ng-if="isActiveClass(group.org)">
+			  <li ng-repeat="group in allGroups | filter:searchText" class="list-group-item" ng-click="updateGroup(group);" ng-if="isActiveClass(group.org)">
 				
 			  	<h3 style="background-color: white">{{group.name}}</h3>
 			  	<p>{{formatMembers(group.members) | limitTo: 50}}{{formatMembers(group.members).length > 50 ? ' ...' : ''}}</p>
@@ -56,7 +56,7 @@ background-color: white;
 		</div>
 		</div>
 		<div class="well" ng-show="selected">
-		<h1 ng-bind="currentGroup" style="text-align: center;">Select A Group!</h1>
+		<h1 ng-bind="currentGroupName" style="text-align: center;">Select A Group!</h1>
 		<center>
 		<h4 ng-bind="currentMembers"></h4>
 		</center>
