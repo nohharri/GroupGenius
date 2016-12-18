@@ -7,6 +7,7 @@ angular.module('myApp.controllers.private', [])
     $scope.isCollapsed = true;
     $scope.messages = [];
     $scope.groups = [];
+    $scope.groupInfo = "";
     $scope.messageText = "";
     $scope.chats = [];
 
@@ -18,6 +19,19 @@ angular.module('myApp.controllers.private', [])
         defaultText: 'Hello, World!'
     });
 
+    // Get Group Data
+    $http.get('https://groupgenius-5953b.firebaseio.com/groups.json')
+    .success(function (response) {
+        var key;
+        for (key in response)
+        {
+            if (response[key].groupId == $scope.groupId)
+            {
+                $scope.groupInfo = response[key];
+                return;
+            }
+        }
+    });
 
     // Initialize chats
     $scope.groupId = $location.search().groupId;
@@ -30,7 +44,7 @@ angular.module('myApp.controllers.private', [])
         console.log($scope.chats);
         console.log("chats logged");
     });
-  //  $scope.$apply();
+    //$scope.$apply();
 
 /*
     chatRef.push({
@@ -42,8 +56,7 @@ angular.module('myApp.controllers.private', [])
         $scope.chatRef.off();
         var setMessage = function(data){
             $scope.messages.push(data.val());
-            //Apply causing issues. Commented out for now and everything seems to be working okay.
-            // $scope.$apply();
+            $scope.$apply();
         }
 
         $scope.chatRef.limitToLast(12).on('child_added', setMessage);
@@ -77,22 +90,6 @@ angular.module('myApp.controllers.private', [])
         $location.search('groupId', name);
     }
     $scope.groupInfo = {};
-
-    $scope.getGroupData = function()
-    {
-      $http.get('https://groupgenius-5953b.firebaseio.com/groups.json').success(function (response) 
-      {
-        var key;
-        for (key in response)
-        {
-            if (response[key].groupId == $scope.groupId)
-            {
-                $scope.groupInfo = response[key];
-                return;
-            }
-        }
-    });
-  };
 });
 
 
