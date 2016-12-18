@@ -207,10 +207,12 @@ angular.module('myApp.controllers.public', [])
 		else // add and take to private group
 		{
 			var update = {};
-				
-			update['/groups/' + $scope.groupId + '/members/'] = userId + " joined the group";
+			
+			// push user to members
+			firebase.database().ref().child('/groups/' + $scope.groupId + '/members').push(userId);
+
+			update['/groups/' + $scope.groupId + '/notifications/logistics/' + userId] = "User id: " + userId + " joined the group";
 			firebase.database().ref().update(update);
-			console.log('moving window');
 			window.location.href = '/app/#/private?groupId=' + $scope.groupId;	
 		}
 	}
