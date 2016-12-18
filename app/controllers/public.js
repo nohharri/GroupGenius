@@ -67,6 +67,9 @@ angular.module('myApp.controllers.public', [])
 		if($scope.currentComments == null){
 			$scope.currentComments = [];
 		}
+		if($scope.groupId == null || $scope.groupId == 0){
+			return;
+		}
 		$scope.currentComments.push({"name": $scope.userIDtoname[firebase.auth().currentUser.uid], "user": firebase.auth().currentUser.uid, "comment": $scope.userComment});
 		// put to groups/id/comments.json
 		console.log('putting to' + 'https://groupgenius-5953b.firebaseio.com/groups/' + $scope.groupId + "/comments.json");
@@ -90,6 +93,9 @@ angular.module('myApp.controllers.public', [])
 
 	$scope.updateGroup = function(groupId, name, desc, members, spots, comments) {
 		$scope.selected = true;
+
+
+		$scope.groupId = groupId;
 		$scope.currentGroup = name;
 		$scope.currentMembers = $scope.formatMembers(members);
 		$scope.currentComments = comments;
@@ -101,8 +107,6 @@ angular.module('myApp.controllers.public', [])
 		}
 		$scope.desc = desc;
 
-		console.log(groupId);
-		$scope.groupId = groupId;
 	}
 	
 	$scope.selCls = function(clas) {
@@ -147,25 +151,17 @@ angular.module('myApp.controllers.public', [])
 		var members = [];
 		//add the creator of the group to the members
 		members.push(firebase.auth().currentUser.uid);
-		
-		// Generate group id (new groupId = number of groups + 1)
-		var groupId = 0;
-		$.ajax({
-			dataType: 'JSON',
-			url: 'https://groupgenius-5953b.firebaseio.com/groups.json',
-			success: function(resp) {groupId = Object.keys(resp).length + 1},
-			async: false // need to wait for response
-		});
-	  // A post entry.
-	  var newGroup = {
-	    name: name,
-	    desc: desc,
-	    members: members,
-	    spots: spots,
-	    mustApprove: mustApprove,
-	    org: org,
-		groupId: 0 // null at first
-	  };
+
+		// A post entry.
+		var newGroup = {
+			name: name,
+			desc: desc,
+			members: members,
+			spots: spots,
+			mustApprove: mustApprove,
+			org: org,
+			groupId: 0 // null at first
+		};
 
 	  // Get a key for a new Post.
 	  var newPostKey = firebase.database().ref().child('groups').push().key;
@@ -189,7 +185,27 @@ angular.module('myApp.controllers.public', [])
 	}
 
 	$scope.joinGroup = function() {
-		window.location.href = '/app/#/private?groupId=' + $scope.groupId;	
+		var userId = firebase.auth().currentUser.uid;
+
+		// Send join request if group is not open
+		if ($scope.currentGroup.mustApprove == "on")
+		{
+			var newKey = userId;
+			var updateNotif = {};
+			
+			updateNotif['/groups/' + $scope.groupId + '/notifications/joinRequest/' + newKey] = userId;
+			firebase.database().ref().update(updateNotif);
+		}
+
+		else // add and take to private group
+		{
+			var update = {};
+			var newKey = userId;
+				
+			update['/groups/' + $scope.groupId + '/members/' + newKey] = userId;
+			firebase.database().ref().update(update);
+			window.location.href = '/app/#/private?groupId=' + $scope.groupId;	
+		}
 	}
     
 });
