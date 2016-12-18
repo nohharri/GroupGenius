@@ -5,7 +5,8 @@ angular.module('myApp.controllers.user', [])
 // Homepage controller
 .controller('UserCtrl', function($scope, $rootScope, firebaseData, $http) {
 	 $scope.isCollapsed = true;
-
+	 $rootScope.curUsername = $scope.curUsername;
+	 
 	 // Fix for not being able to use anchors
 	 $scope.scrollTo = function (target)
 	 {
