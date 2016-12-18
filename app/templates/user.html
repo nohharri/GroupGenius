@@ -21,30 +21,43 @@
 				<p ng-repeat="p in pendingGroups">{{ p.org }} - {{ p.name }}</p></center>
 			</div>
 
-			<div id="{{org}}" class="wrapper-organization" ng-repeat="(org, groups) in pageData" style="margin-top: 50px;">
-				<a style="cursor: hand;" data-target="#{{org}}Content" data-toggle="collapse"> <h2 style="display: inline; cursor: hand; margin-top: 25px;">{{org}}</h2><span style="font-size: 20px; margin-left: 5px" class="glyphicon glyphicon-chevron-down"></span></a><br />
+			<div id="{{org}}" class="wrapper-organization" ng-repeat="(org, groups) in pageData">
+				<a style="cursor: hand;" data-target="#{{org}}Content" data-toggle="collapse">
+					<h2 style="display: inline; cursor: hand; margin-top: 25px;">{{org}}</h2>
+					<span class="chev-org glyphicon glyphicon-chevron-down"></span>
+				</a>
+				<br />
 				<div id="{{org}}Content" class="row">
-					<div id="wrapper-group-groupTitle" class="wrapper-group col-md-4 collapse in" style="border: none" ng-repeat="group in groups"><div style="border: 1px solid black; margin-top: 7px; border-radius: 5px; padding: 25px; padding-top: 10px; padding-bottom: 40px; box-shadow: 2px 2px 2px grey;"><center>
-						<div class="group-title-bar">
-							<h3><a href="#/private?groupId={{group.groupId}}">{{group.name}}</a></h3>
-						</div>
-						<div id="" class="wrapper-group-notification row">
-							<div id="" class="group-notification col-md-4" >
-								<div class="group-notification-icon"><img src="static/img/icon-joinRequest.svg"/></div>
+					<div id="wrapper-group-{{group.groupId}}" class="wrapper-group col-md-4 collapse in" ng-repeat="(groupKey, group) in groups">
+
+						<center>
+							<div class="group-title-bar">
+								<h3><a href="#/private?groupId={{group.groupId}}">{{group.name}}</a></h3>
+							</div>
+
+							<div id="" class="wrapper-group-notification row">
+								<div id="" class="group-notification col-md-4" >
+									<div class="group-notification-icon"><img src="static/img/icon-joinRequest.svg"/></div>
 									{{ parseNotifications(group.notifications.joinRequest).length }} new requests
-							</div>
-							<div id="" class="group-notification col-md-4" >
-								<div class="group-notification-icon"><img src="static/img/icon-logistics.svg"/></div>
+								</div>
+								<div id="" class="group-notification col-md-4" >
+									<div class="group-notification-icon"><img src="static/img/icon-logistics.svg"/></div>
 									{{ parseNotifications(group.notifications.logistics).length }} new logistics
-							</div>
-							<div id="" class="group-notification col-md-4" >
-								<div class="group-notification-icon"><img src="static/img/icon-contribute.svg"/></div>
+								</div>
+								<div id="" class="group-notification col-md-4" >
+									<div class="group-notification-icon"><img src="static/img/icon-contribute.svg"/></div>
 									{{ parseNotifications(group.notifications.contributions).length }} new contrib
-							</div>
-<div style="position: absolute; bottom: 0; width: calc(100% - 50px);" ng-if="group.notifications" data-target="#{{org}}-{{group.groupId}}-notifications" data-toggle="collapse"  >
-<span class="glyphicon glyphicon-chevron-down" style="margin-left: auto;"></span></div>
-						</div> <!-- END notification wrapper -->
-							<div id="{{org}}-{{group.groupId}}-notifications" class="wrapper-group-notification-details collapse" ng-init="notifications = parseAllNotifications(group.notifications)"><hr />
+								</div>
+								<div class="wrapper-chev-notif" ng-if="group.notifications" data-target="#{{org}}-{{group.groupId}}-notifications" data-toggle="collapse"  >
+									<span class="chev-notif glyphicon glyphicon-chevron-down"></span>
+								</div>
+								<div id="" class="wrapper-leaveBtn">
+									<button ng-click="leaveGroup(org, groupKey, group.groupId); showGroup = false">Leave group</button>
+								</div>
+							</div> <!-- END notification wrapper -->
+
+							<div id="{{org}}-{{group.groupId}}-notifications" class="wrapper-group-notification-details collapse" ng-init="notifications = parseAllNotifications(group.notifications)">
+								<hr />
 								<!-- ng-repeat for notifications -->
 								<div class="group-notification-detail well" ng-repeat="notif in notifications" ng-hide="showNotif">
 									<div class="group-notification-icon-small">
@@ -59,11 +72,13 @@
 								</div>
 							</div> <!-- END expanded notifications -->
 
-					</div><!-- END .wrapper-group -->
-				</div> <!-- END .row -->
-</center></div>
+						</center>
+					</div> <!-- END .wrapper-group -->
+				</div><!-- END #orgContent / .row -->
+					
 			</div> <!-- END .wrapper-organization -->
 			
 	
-	</div> <!-- END .row -->
+		</div> <!-- END #wrapper-main -->
+	</div> <!-- END .user .row -->
 </div> <!-- END #wrapper-user -->

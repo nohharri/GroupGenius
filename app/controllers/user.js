@@ -63,6 +63,23 @@ angular.module('myApp.controllers.user', [])
 		firebase.database().ref().child('/groups/' + groupId + '/notifications/' + type + '/' + userId).remove();
 	}
 
+	$scope.leaveGroup = function(orgId, groupKey, groupId)
+	{
+		var curUser = firebase.auth().currentUser.uid;
+		var group = $scope.pageData[orgId][groupKey];
+		var userKey;
+
+		for (var memb in group['members']) //loop through memebers to get key of user
+		{
+			if (group['members'][memb] == curUser)
+			{ 
+				userKey = memb;
+				break;
+			}
+		}
+		firebase.database().ref().child('/groups/' + groupId + '/members/' + userKey).remove();		
+	}
+
 
 	$scope.parseNotifications = function(rawNotifications)
 	{
