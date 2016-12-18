@@ -43,9 +43,9 @@
 							<span class="caret" data-target="#{{org}}-{{group.groupId}}-notifications" data-toggle="collapse"></span>
 							<div id="{{org}}-{{group.groupId}}-notifications" class="wrapper-group-notification-details collapse">
 								<!-- ng-repeat for notifications -->
-								<div class="group-notification-detail">
+								<div class="group-notification-detail" ng-repeat="(notifType, notifVal) in group.notifications">
 									<div class="group-notification-icon-small"></div>
-									Stali changed the group name
+									{{notifType}} - {{notifVal}}
 								</div>
 							</div> <!-- END expanded notifications -->
 

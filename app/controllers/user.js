@@ -44,7 +44,6 @@ angular.module('myApp.controllers.user', [])
 				}
 			}
 			console.log(pageData);
-			console.log(pendingGroups);
 			$scope.pageData = pageData;
 			$scope.pendingGroups = pendingGroups;
 		});
