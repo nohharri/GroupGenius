@@ -3,7 +3,7 @@
 angular.module('myApp.controllers.private', [])
 
 // Homepage controller
-.controller('PrivateCtrl', function($scope, $rootScope, firebaseData, $location, $http) {
+.controller('PrivateCtrl', function($scope, $rootScope, firebaseData, $location, $http, $timeout) {
     $scope.isCollapsed = true;
     $scope.messages = [];
     $scope.groups = [];
@@ -32,12 +32,28 @@ angular.module('myApp.controllers.private', [])
     console.log($scope.groupId);
     $scope.chatRef = firebaseData.database().ref('/chat/' + $scope.groupId + '/');
 
-    // Add chat listener
-    $scope.chatRef.on('value', function(snapshot) {
-        $scope.chats = snapshot.val();
-        console.log($scope.chats);
-        console.log("chats logged");
-    });
+    $scope.chats = getChats();     
+
+    var chatsTimeout;
+    chatsTimeout = $timeout(function() {
+        if(!$scope.chats) {
+            console.log("Data not loaded");
+            $scope.chats = getChats();
+        }
+    }, 500);
+
+    function getChats() {
+        // Add chat listener
+        $scope.chatRef.on('value', function(snapshot) {
+            $timeout(function() {
+                $scope.chats = snapshot.val();
+                console.log($scope.chats);
+                $scope.$apply();
+                return snapshot.val();
+            }, 50);
+        });
+    }
+
     //$scope.$apply();
 
     /*
