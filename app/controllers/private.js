@@ -10,6 +10,7 @@ angular.module('myApp.controllers.private', [])
     $scope.groupInfo = "";
     $scope.messageText = "";
     $scope.chats = [];
+    $scope.selected = null;
 
     var firepadRef = firebaseData.database().ref('/docs/' + $scope.groupId + '/');
 
@@ -27,81 +28,75 @@ angular.module('myApp.controllers.private', [])
         }
     });
 
+
     // Initialize chats
     $scope.groupId = $location.search().groupId;
     console.log($scope.groupId);
     $scope.chatRef = firebaseData.database().ref('/chat/' + $scope.groupId + '/');
 
-    $scope.chats = getChats();     
 
-    var chatsTimeout;
-    chatsTimeout = $timeout(function() {
-        if(!$scope.chats) {
-            console.log("Data not loaded");
-            $scope.chats = getChats();
-        }
-    }, 500);
-
-    function getChats() {
-        // Add chat listener
+    $timeout(function() {
         $scope.chatRef.on('value', function(snapshot) {
             $timeout(function() {
-                $scope.chats = snapshot.val();
-                console.log($scope.chats);
+                if($scope.chats.length == 0) {
+                    $scope.chatObjects = snapshot.val();
+                    if($scope.chatObjects) {
+                        for(var key in $scope.chatObjects) {
+                            $scope.chatObjects[key].chatName = key;
+                            $scope.chatObjects[key].selected = false;
+                            console.log($scope.chatObjects[key]);
+                            $scope.chats.push($scope.chatObjects[key]);
+                        }
+                    } 
+                }
+                // Initialize the first variable
+                $scope.chats[0].selected = true;
+
                 $scope.$apply();
-                return snapshot.val();
-            }, 50);
+            }, 1000);
         });
+    }, 1000);
+
+
+    firebaseData.provider().onAuthStateChanged(function(user) {
+        var userId = user.uid;
+
+            //firepad stuff
+            var codeMirror = CodeMirror(document.getElementById('wrapper-document'), { lineWrapping: true });
+            var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
+                richTextShortcuts: true,
+                richTextToolbar: true,
+                userId: userId,
+                defaultText: 'Hello, World!'
+            });
+            var firepadUserList = FirepadUserList.fromDiv(firepadRef.child('users'),
+                document.getElementById('group-activeStatus'), userId, getUniqname(user.email));
+
+
+            $scope.chatRef.off();
+            var setMessage = function(data){
+                $scope.messages.push(data.val());
+                $scope.$apply();
+            }
+
+            $scope.chatRef.limitToLast(12).on('child_added', setMessage);
+            $scope.chatRef.limitToLast(12).on('child_changed', setMessage);
+        });
+
+        $scope.saveMessage = function() {
+            if(!$scope.messageText) {
+                return;
+            }
+
+        $scope.chatRef.push({
+            name: "Test name",
+            text: $scope.messageText
+        }).then(function() {
+            $scope.messageText = "";
+                //This apply seems to be okay. Comment out if we're still getting errors.
+                $scope.$apply();
+            });
     }
-
-    //$scope.$apply();
-
-    /*
-    chatRef.push({
-        name: "Test name",
-        text: $scope.messageText
-    })*/
-
-firebaseData.provider().onAuthStateChanged(function(user) {
-
-    var userId = user.uid;
-
-        //firepad stuff
-        var codeMirror = CodeMirror(document.getElementById('wrapper-document'), { lineWrapping: true });
-        var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
-            richTextShortcuts: true,
-            richTextToolbar: true,
-            userId: userId,
-            defaultText: 'Hello, World!'
-        });
-        var firepadUserList = FirepadUserList.fromDiv(firepadRef.child('users'),
-            document.getElementById('group-activeStatus'), userId, getUniqname(user.email));
-
-
-        $scope.chatRef.off();
-        var setMessage = function(data){
-            $scope.messages.push(data.val());
-            $scope.$apply();
-        }
-
-        $scope.chatRef.limitToLast(12).on('child_added', setMessage);
-        $scope.chatRef.limitToLast(12).on('child_changed', setMessage);
-    });
-
-$scope.saveMessage = function() {
-    if(!$scope.messageText) {
-        return;
-    }
-
-    $scope.chatRef.push({
-        name: "Test name",
-        text: $scope.messageText
-    }).then(function() {
-        $scope.messageText = "";
-            //This apply seems to be okay. Comment out if we're still getting errors.
-            $scope.$apply();
-        });
-}
 
 $scope.location = $location;
     // Gets groupId from the url

@@ -191,7 +191,7 @@ angular.module('myApp.controllers.public', [])
 	  var newPostKey = firebase.database().ref().child('groups').push().key;
 
 	  // Create default chat
-	  var chatRef = firebase.database().ref('/chat/' + newPostKey + '/' + 'General');
+	  var chatRef = firebase.database().ref('/chat/' + newPostKey);
 	  var keyName = chatRef.push({
 	  	name: 'Chatbot',
 	  	text: 'Welcome to the stream!'
