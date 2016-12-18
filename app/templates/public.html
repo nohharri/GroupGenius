@@ -14,22 +14,20 @@ background-color: white;
 			<button class="btn btn-primary dropdown-toggle" style="padding-bottom: 0px; width: 100%; font-size: 20px" type="button" data-toggle="dropdown">{{currentClass}} <br /><span class="glyphicon glyphicon-chevron-down"></span></button>
 			<ul class="dropdown-menu" style="width: 100%">
 				<a ng-repeat="class in classes" style="width: 100%; font-size: 18px">
-<center>
-					<li ng-click="selCls(class)" style="width: 100%">
-					{{class}}
-					</li>
-</center>
+					<center>
+						<li ng-click="selCls(class)" style="width: 100%">
+							{{class}}
+						</li>
+					</center>
 				</a>
 			</ul>
 		</div>
 
-			<input type="text" class="form-control" id="search-input" placeholder="Search for groups..." autocomplete="off" style="width: 100%;display:inline-block;" ng-model="searchText">
-		
-
+		<input type="text" class="form-control" id="search-input" placeholder="Search for groups..." autocomplete="off" style="width: 100%;display:inline-block;" ng-model="searchText">
 
 		<div style="margin: 10px; width: 95%; height: calc(100vh - 350px); overflow-y: auto;">
 			<ul class="list-group">
-			  <li ng-repeat="group in allGroups | filter:searchText" class="list-group-item" ng-click="updateGroup(group.name, group.desc, group.members, group.spots);" ng-if="isActiveClass(group.org)">
+			  <li ng-repeat="group in allGroups | filter:searchText" class="list-group-item" ng-click="updateGroup(group.groupId, group.name, group.desc, group.members, group.spots);" ng-if="isActiveClass(group.org)">
 				
 			  	<h3 style="background-color: white">{{group.name}}</h3>
 			  	<p>{{formatMembers(group.members) | limitTo: 50}}{{formatMembers(group.members).length > 50 ? ' ...' : ''}}</p>
@@ -69,7 +67,7 @@ background-color: white;
 		<p style="padding-bottom: 20px" ng-bind="desc"></p>
 		</center>
 		<hr />
-		<button style="display: block;margin: auto; text-align: center; font-size: 20px; width: 60%"type="button" class="btn btn-success">Join this Group</button>
+		<button style="display: block;margin: auto; text-align: center; font-size: 20px; width: 60%" type="button" class="btn btn-success" ng-click="joinGroup()">Join this Group</button>
 		<center><div ng-bind="openSpots" style="font-size: 11px; padding-top: 10px"></div></center>
 		<br>
 		</div>
