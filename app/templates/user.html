@@ -1,66 +1,68 @@
 <!-- User Homepage -->
 <div id="wrapper-user" class="" ng-init="getData()">
 	<div id="" class="user row">
-		<div id="wrapper-sidebar" class="col-md-2">
+
+		<div id="wrapper-sidebar" style="background-color: #3366ff" class="col-sm-2"><center>
 			<div id="" class="wrapper-profile">
 				<img src="" class="img-circle"/>
-				<h3>Username</h3>
+				<h3 style="color: white">Username</h3>
 			</div>
 
-			<div id="" class="wrapper-quicklinks" ng-repeat="(orgs, groups) in pageData">
-				<span class="quicklink" ng-click="scrollTo(orgs)">{{orgs}}</span>
-			</div>
+				<hr />
+			<div id="" class="list-group wrapper-quicklinks" ng-repeat="(orgs, groups) in pageData">
+				<a class="quicklink list-group-item" style="border-top-right-radius: 2em; border-bottom-right-radius: 2em; border-top-left-radius: 0px; border-bottom-left-radius: 0px;" ng-click="scrollTo(orgs)">{{orgs}}</a>
+			</div></center>
 		</div>
-		<div id="wrapper-main" class="col-md-10">
-		
-			<a href="#/public"><button>Look for a group!</button></a>
-
-			<div ng-if="pendingGroups.length > 0">
-				<h4>Pending groups</h4>
-				<p ng-repeat="p in pendingGroups">{{ p.org }} - {{ p.name }}</p>
+		<div id="wrapper-main" style="padding: 50px" class="col-sm-10">
+		<center>
+			<a href="#/public"><button type="button" style="width: 70%;" class="btn btn-success btn-lg">Look for a group!</button></a>
+		</center>
+			<div ng-if="pendingGroups.length > 0"><center>
+				<h4>Pending groups..</h4>
+				<p ng-repeat="p in pendingGroups">{{ p.org }} - {{ p.name }}</p></center>
 			</div>
-			<div id="{{org}}" class="wrapper-organization" ng-repeat="(org, groups) in pageData">
-				<h2>{{org}}</h2>
-				<span class="caret" data-target="#{{org}}Content" data-toggle="collapse"></span>
+
+			<div id="{{org}}" class="wrapper-organization" ng-repeat="(org, groups) in pageData" style="margin-top: 50px;">
+				<a style="cursor: hand;" data-target="#{{org}}Content" data-toggle="collapse"> <h2 style="display: inline; cursor: hand; margin-top: 25px;">{{org}}</h2><span style="font-size: 20px; margin-left: 5px" class="glyphicon glyphicon-chevron-down"></span></a><br />
 				<div id="{{org}}Content" class="row">
-					<div id="wrapper-group-groupTitle" class="wrapper-group col-md-4 collapse in"  ng-repeat="group in groups">
+					<div id="wrapper-group-groupTitle" class="wrapper-group col-md-4 collapse in" style="border: none" ng-repeat="group in groups"><div style="border: 1px solid black; margin-top: 7px; border-radius: 5px; padding: 25px; padding-top: 10px; padding-bottom: 40px; box-shadow: 2px 2px 2px grey;"><center>
 						<div class="group-title-bar">
 							<h3><a href="#/private?groupId={{group.groupId}}">{{group.name}}</a></h3>
 						</div>
 						<div id="" class="wrapper-group-notification row">
-							<div id="" class="group-notification col-md-4" ng-if="group.mustApprove == 'on'">
+							<div id="" class="group-notification col-md-4" >
 								<div class="group-notification-icon"><img src="static/img/icon-joinRequest.svg"/></div>
 									{{ parseNotifications(group.notifications.joinRequest).length }} new requests
 							</div>
-							<div id="" class="group-notification col-md4" ng-if="group.notifications.logistics">
+							<div id="" class="group-notification col-md-4" >
 								<div class="group-notification-icon"><img src="static/img/icon-logistics.svg"/></div>
 									{{ parseNotifications(group.notifications.logistics).length }} new logistics
 							</div>
-							<div id="" class="group-notification col-md-4" ng-if="group.notifications.contributions">
+							<div id="" class="group-notification col-md-4" >
 								<div class="group-notification-icon"><img src="static/img/icon-contribute.svg"/></div>
-									{{ parseNotifications(group.notifications.contributions).length }} new contributions
+									{{ parseNotifications(group.notifications.contributions).length }} new contrib
 							</div>
-
-							<span ng-if="group.notifications" class="caret" data-target="#{{org}}-{{group.groupId}}-notifications" data-toggle="collapse"></span>
-							<div id="{{org}}-{{group.groupId}}-notifications" class="wrapper-group-notification-details collapse" ng-init="notifications = parseAllNotifications(group.notifications)">
+<div style="position: absolute; bottom: 0; width: calc(100% - 50px);" ng-if="group.notifications" data-target="#{{org}}-{{group.groupId}}-notifications" data-toggle="collapse"  >
+<span class="glyphicon glyphicon-chevron-down" style="margin-left: auto;"></span></div>
+						</div> <!-- END notification wrapper -->
+							<div id="{{org}}-{{group.groupId}}-notifications" class="wrapper-group-notification-details collapse" ng-init="notifications = parseAllNotifications(group.notifications)"><hr />
 								<!-- ng-repeat for notifications -->
-								<div class="group-notification-detail" ng-repeat="notif in notifications" ng-hide="showNotif">
+								<div class="group-notification-detail well" ng-repeat="notif in notifications" ng-hide="showNotif">
 									<div class="group-notification-icon-small">
-										<img ng-src="static/img/icon-{{notif[0]}}.svg"/>
+										<img ng-src="static/img/icon-{{notif[0]}}.svg" style="height: 40px;"/>
 									</div>
-									{{ notif[1] }}
+									{{ notif[1] }}<br /><br />
 									<div ng-if="notif[0]=='joinRequest'">
-										<button ng-click="approve(group.groupId, notif[2]); showNotif = ! showNotif">Approve</button>
+									<br />	<button ng-click="approve(group.groupId, notif[2]); showNotif = ! showNotif">Approve</button>
 										<button ng-click="removeNotification(group.groupId, notif[2], notif[0]); showNotif = ! showNotif">Deny</button>
 									</div>
-									<button ng-if="notif[0] != 'joinRequest'" ng-click="removeNotification(group.groupId, notif[2], notif[0]); showNotif = ! showNotif">X</button>
+									<button ng-if="notif[0] != 'joinRequest'" ng-click="removeNotification(group.groupId, notif[2], notif[0]); showNotif = ! showNotif">Dismiss</button>
 								</div>
 							</div> <!-- END expanded notifications -->
 
-						</div> <!-- END notification wrapper -->
 					</div><!-- END .wrapper-group -->
 				</div> <!-- END .row -->
-
+</center></div>
 			</div> <!-- END .wrapper-organization -->
 			
 	
