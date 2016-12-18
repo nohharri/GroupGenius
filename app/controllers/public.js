@@ -91,7 +91,7 @@ angular.module('myApp.controllers.public', [])
 		return false;
 	}
 
-	$scope.updateGroup = function(groupId, name, desc, members, spots, comments) {
+	$scope.updateGroup = function(groupId, name, desc, members, spots, comments, approval) {
 		$scope.selected = true;
 
 
@@ -99,6 +99,7 @@ angular.module('myApp.controllers.public', [])
 		$scope.currentGroup = name;
 		$scope.currentMembers = $scope.formatMembers(members);
 		$scope.currentComments = comments;
+		$scope.approvalSetting = approval;
 		
 		if(spots == -1) {
 			$scope.openSpots = 'Open Spots: Unlimited';
@@ -190,21 +191,20 @@ angular.module('myApp.controllers.public', [])
 		var userId = firebase.auth().currentUser.uid;
 
 		// Send join request if group is not open
-		if ($scope.currentGroup.mustApprove == "on")
+		if ($scope.approvalSetting == "on")
 		{
 			var newKey = userId;
 			var updateNotif = {};
 			
-			updateNotif['/groups/' + $scope.groupId + '/notifications/joinRequest/' + newKey] = userId;
+			updateNotif['/groups/' + $scope.groupId + '/notifications/joinRequest/' + newKey] = "User id: " + userId + " asked to join the group";
 			firebase.database().ref().update(updateNotif);
 		}
 
 		else // add and take to private group
 		{
 			var update = {};
-			var newKey = userId;
 				
-			update['/groups/' + $scope.groupId + '/members/' + newKey] = userId;
+			update['/groups/' + $scope.groupId + '/members/'] = userId + " joined the group";
 			firebase.database().ref().update(update);
 			window.location.href = '/app/#/private?groupId=' + $scope.groupId;	
 		}
