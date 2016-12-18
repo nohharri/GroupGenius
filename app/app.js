@@ -61,6 +61,7 @@ angular.module('myApp', [
     $rootScope.isAuthenticated = true;
     $scope.showProfileSettings = false;
     $scope.headerUsername = "Guest"
+    $rootScope.curUsername = "FUCKFIRE";
 
     firebaseData.provider().onAuthStateChanged(function(user) {
 
@@ -68,6 +69,8 @@ angular.module('myApp', [
             //We have a user
             $scope.headerUsername = user.email;
             $rootScope.isAuthenticated = true;
+            $scope.getUserName(user.uid);
+            
         }else{
             $scope.headerUsername = "Guest";
             $rootScope.isAuthenticated = false;
@@ -89,6 +92,18 @@ angular.module('myApp', [
           console.error('Sign Out Error', error);
       });
     }
+
+    	$scope.getUserName = function(userId)
+        {
+                firebase.database().ref().child('users/').once('value', function(snapshot) {
+                    var users = snapshot.val();
+                    for (var key in users)
+                    {
+                        if (users[key].uid == userId)
+                            $rootScope.curUsername = users[key].firstName + ' ' + users[key].lastName;
+                    }
+                });
+        }
 })
 
 .run(['$rootScope', function($rootScope) {

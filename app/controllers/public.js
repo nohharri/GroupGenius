@@ -211,16 +211,18 @@ angular.module('myApp.controllers.public', [])
 	  //window.location.href = '/app/#/private?groupId=' + newPostKey;
 	}
 
+
+
 	$scope.joinGroup = function() {
 		var userId = firebase.auth().currentUser.uid;
-		
+		var username = $rootScope.curUsername;
 		// Send join request if group is not open
 		if ($scope.approvalSetting == "on" && !$scope.currMember)
 		{
 			var newKey = userId;
 			var updateNotif = {};
 			
-			updateNotif['/groups/' + $scope.groupId + '/notifications/joinRequest/' + newKey] = "User id: " + userId + " asked to join the group";
+			updateNotif['/groups/' + $scope.groupId + '/notifications/joinRequest/' + newKey] = username + " asked to join the group";
 			firebase.database().ref().update(updateNotif);
 		}
 
@@ -230,13 +232,16 @@ angular.module('myApp.controllers.public', [])
 			
 			// push user to members
 			firebase.database().ref().child('/groups/' + $scope.groupId + '/members').push(userId);
-
-			update['/groups/' + $scope.groupId + '/notifications/logistics/' + userId] = "User id: " + userId + " joined the group";
+			
+			update['/groups/' + $scope.groupId + '/notifications/logistics/' + userId] = username + " joined the group";
 			firebase.database().ref().update(update);
 			window.location.href = '/app/#/private?groupId=' + $scope.groupId;	
 		}
 	}
-    
+
+
+
+
 });
 
 
