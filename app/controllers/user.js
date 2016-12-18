@@ -25,7 +25,7 @@ angular.module('myApp.controllers.user', [])
 			// Create object of orgs with array of groups for each org
 			for (key in response)
 			{
-				if ($scope.search(response[key].members, userId) != false)
+				if ($scope.search(response[key].members, userId) != -1)
 				{
 						if (pageData[response[key].org]) // add another group to org
 							pageData[response[key].org].push(response[key]);
@@ -39,7 +39,6 @@ angular.module('myApp.controllers.user', [])
 					{
 						if (response[key].notifications.joinRequest[userId]) //user has requested to be in this group
 								pendingGroups.push(response[key]);
-						
 					}
 				}
 			}
@@ -50,6 +49,29 @@ angular.module('myApp.controllers.user', [])
 		
 	};
 
+	$scope.parseNotifications = function(rawNotifications)
+	{
+			var logs = [];
+			for (var key in rawNotifications)
+				logs.push(rawNotifications[key]);
+			return $scope.current_notif = logs;
+	};
+
+	// Goes through a notifcatinos object and gives back a tuple of [type, text]
+	$scope.parseAllNotifications = function(raw)
+	{
+		var notification = [];
+		for (var notifType in raw)
+		{
+			for (var notif in raw[notifType])
+				notification.push([notifType, raw[notifType][notif]])
+		}
+		return notification;
+	}
+	$scope.sizeOf = function(inObj)
+	{
+		return inObj.length;
+	}
 	// function for searching data for value. returns false if nothing found, else returns the key
 	$scope.search = function(arr, target) { 
 		var key;
