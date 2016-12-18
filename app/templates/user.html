@@ -2,7 +2,7 @@
 <div id="wrapper-user" class="" ng-init="getData()">
 	<div id="" class="user row">
 
-		<div id="wrapper-sidebar" style="background-color: #3366ff" class="col-sm-2"><center>
+		<div id="wrapper-sidebar" style="background-color: #3366ff" class="col-sm-2 col-xs-2"><center>
 			<div id="" class="wrapper-profile">
 				<h3 style="color: white">{{curUsername}}</h3>
 			</div>
@@ -12,13 +12,17 @@
 				<a class="quicklink list-group-item" style="border-top-right-radius: 2em; border-bottom-right-radius: 2em; border-top-left-radius: 0px; border-bottom-left-radius: 0px;" ng-click="scrollTo(orgs)">{{orgs}}</a>
 			</div></center>
 		</div>
-		<div id="wrapper-main" style="padding: 50px" class="col-sm-10">
-		<center>
-			<a href="#/public"><button type="button" style="width: 70%;" class="btn btn-success btn-lg">Look for a group!</button></a>
-		</center>
-			<div ng-if="pendingGroups.length > 0"><center>
+		<div id="wrapper-main" style="padding: 50px" class="col-sm-10 col-xs-10">
+		<div class="groups-background">
+			<h1 style="color: white; text-align: center; top: 50px; position: relative;">User Groups</h1>
+		</div>
+			<a href="#/public"><button type="button" class="btn btn-success btn-lg" style="float: right;">Look for a group!</button></a>
+
+			<div ng-if="pendingGroups.length > 0">
 				<h4>Pending groups..</h4>
-				<p ng-repeat="p in pendingGroups">{{ p.org }} - {{ p.name }}</p></center>
+				<div class="pending-groups">
+					<p ng-repeat="p in pendingGroups">{{ p.org }} - {{ p.name }}</p>
+				</div>
 			</div>
 
 			<div id="{{org}}" class="wrapper-organization" ng-repeat="(org, groups) in pageData">
@@ -32,7 +36,7 @@
 
 						<center>
 							<div class="group-title-bar">
-								<h3><a href="#/private?groupId={{group.groupId}}">{{group.name}}</a></h3>
+								<h3 class="clickable"><a href="#/private?groupId={{group.groupId}}">{{group.name}}</a></h3>
 							</div>
 
 							<div id="" class="wrapper-group-notification row">
@@ -51,8 +55,8 @@
 								<div class="wrapper-chev-notif" ng-if="group.notifications" data-target="#{{org}}-{{group.groupId}}-notifications" data-toggle="collapse"  >
 									<span class="chev-notif glyphicon glyphicon-chevron-down"></span>
 								</div>
-								<div id="" class="wrapper-leaveBtn">
-									<button ng-click="leaveGroup(org, groupKey, group.groupId); showGroup = !showGroup">Leave group</button>
+								<div class="wrapper-leaveBtn">
+									<button class="btn btn-danger" ng-click="leaveGroup(org, groupKey, group.groupId); showGroup = !showGroup">Leave group</button>
 								</div>
 							</div> <!-- END notification wrapper -->
 
@@ -68,7 +72,7 @@
 										<button ng-click="approve(group.groupId, notif[2]); showNotif = ! showNotif">Approve</button>
 										<button ng-click="removeNotification(group.groupId, notif[2], notif[0]); showNotif = ! showNotif">Deny</button>
 									</div>
-									<button ng-if="notif[0] != 'joinRequest'" ng-click="removeNotification(group.groupId, notif[2], notif[0]); showNotif = ! showNotif">Dismiss</button>
+									<button ng-if="notif[0] != 'joinRequest'" ng-click="removeNotification(group.groupId, notif[2], notif[0]); showNotif = ! showNotif" class="btn btn-primary">Dismiss</button>
 								</div>
 							</div> <!-- END expanded notifications -->
 

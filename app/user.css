@@ -35,14 +35,12 @@
 
 .wrapper-group
 {
-	border: 1px solid black; 
 	margin-top: 32px; 
 	margin: 25px;
 	border-radius: 5px; 
 	padding: 25px; 
 	padding-top: 10px; 
 	padding-bottom: 40px; 
-	box-shadow: 2px 2px 2px grey;
 	width: calc(50% - 50px) !important;
 }
 

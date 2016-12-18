@@ -42,6 +42,14 @@
 	}
 }
 
+.btn-danger {
+	background-color: @red-color;
+	border: darken(@red-color, 10%);
+	&:hover {
+		background-color: darken(@red-color, 10%);
+	}	
+}
+
 // Header
 .header {
 	width: 100%;
@@ -142,7 +150,6 @@
 
 
 // Private
-
 .chat-area {
 	overflow-y: scroll;
 	height: 300px;
@@ -172,4 +179,39 @@
 
 .chat-unselected {
 	background-color: white;
+}
+
+// User
+.leave-group-btn {
+	background-color: @red-color;
+}
+
+.wrapper-group {
+	border: 1px solid @grey-color-lighter;
+	border-top: 2px solid @grey-color-lighter;
+	border-bottom: 2px solid @grey-color-light;
+}
+
+.wrapper-leaveBtn .btn {
+	margin: 0 auto;
+	margin-bottom: 10px;
+	margin-right: 10px;
+	text-align: center;
+}
+
+.groups-background {
+	width: 100%;
+	height: 150px;
+	z-index: 2;
+	background-color: red;
+	background: url(../../static/img/library.png) no-repeat center center; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	margin-bottom: 20px;
+}
+
+.pending-groups {
+	color: @grey-color;
 }
