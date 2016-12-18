@@ -81,7 +81,7 @@ angular.module('myApp.controllers.public', [])
 		}
 		$scope.desc = desc;
 
-		//console.log(group);
+		console.log(groupId);
 		$scope.groupId = groupId;
 	}
 	
