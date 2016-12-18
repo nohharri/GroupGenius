@@ -3,7 +3,7 @@
 angular.module('myApp.controllers.private', [])
 
 // Homepage controller
-.controller('PrivateCtrl', function($scope, $rootScope, firebaseData, $location, $http, $timeout) {
+.controller('PrivateCtrl', function($scope, $rootScope, firebaseData, $location, $http, $timeout, $firebaseObject) {
     $scope.isCollapsed = true;
     $scope.messages = [];
     $scope.groups = [];
@@ -11,6 +11,8 @@ angular.module('myApp.controllers.private', [])
     $scope.messageText = "";
     $scope.chats = [];
     $scope.selected = null;
+    $scope.name = '';
+    $scope.userData;
 
     $scope.groupId = $location.search().groupId;
     
@@ -31,7 +33,44 @@ angular.module('myApp.controllers.private', [])
         }
     });
 
-
+    firebaseData.provider().onAuthStateChanged(function(user) {
+        var email = firebaseData.provider().currentUser.email;
+        //console.log(email);
+        var userRef = firebaseData.database().ref('/users/');
+        $scope.userData = $firebaseObject(userRef);
+        //userRefObject.$bindTo($scope, 'userData');
+        $scope.userData.$loaded()
+          .then(function() {
+            console.log('user data');
+            console.log($scope.userData);
+            for(var user in $scope.userData) {
+                if($scope.userData[user]) {
+                    if(email == $scope.userData[user].email) {
+                        console.log(user);
+                        $scope.name = $scope.userData[user].firstName + ' ' + $scope.userData[user].lastName;
+                        console.log('name found: ' + $scope.name);
+                        break;
+                    }
+                }
+            }
+          })
+          .catch(function(err) {
+            console.error(err);
+          });
+    });
+/*
+    firebaseData.database().ref('/users/').on('value', function(snapshot) {
+        var users = snapshot.val();
+        for(var user in users) {
+            if(email == user.email) {
+                console.log(user);
+                $scope.name = user.firstName + ' ' + user.lastName;
+                console.log('name found: ' + $scope.name);
+                break;
+            }
+        }
+    });
+*/
     // Initialize chats
     console.log($scope.groupId);
     $scope.chatRef = firebaseData.database().ref('/chat/' + $scope.groupId + '/');
@@ -62,43 +101,42 @@ angular.module('myApp.controllers.private', [])
 
     firebaseData.provider().onAuthStateChanged(function(user) {
         var userId = user.uid;
-
-            //firepad stuff
-            var codeMirror = CodeMirror(document.getElementById('wrapper-document'), { lineWrapping: true });
-            var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
-                richTextShortcuts: true,
-                richTextToolbar: true,
-                userId: userId,
-                defaultText: 'Hello, World!'
-            });
-            var firepadUserList = FirepadUserList.fromDiv(firepadRef.child('users'),
-                document.getElementById('group-activeStatus'), userId, getUniqname(user.email));
-
-
-            $scope.chatRef.off();
-            var setMessage = function(data){
-                $scope.messages.push(data.val());
-                $scope.$apply();
-            }
-
-            $scope.chatRef.limitToLast(12).on('child_added', setMessage);
-            $scope.chatRef.limitToLast(12).on('child_changed', setMessage);
+        //firepad stuff
+        var codeMirror = CodeMirror(document.getElementById('wrapper-document'), { lineWrapping: true });
+        var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
+            richTextShortcuts: true,
+            richTextToolbar: true,
+            userId: userId,
+            defaultText: 'Hello, World!'
         });
+        var firepadUserList = FirepadUserList.fromDiv(firepadRef.child('users'),
+        document.getElementById('group-activeStatus'), userId, getUniqname(user.email));
 
-        $scope.saveMessage = function() {
-            if(!$scope.messageText) {
-                return;
-            }
+        $scope.chatRef.off();
+        var setMessage = function(data){
+            $scope.messages.push(data.val());
+            $scope.$apply();
+        }
 
-        $scope.chatRef.push({
-            name: "Test name",
-            text: $scope.messageText
-        }).then(function() {
-            $scope.messageText = "";
-                //This apply seems to be okay. Comment out if we're still getting errors.
-                $scope.$apply();
-            });
+        $scope.chatRef.limitToLast(12).on('child_added', setMessage);
+        $scope.chatRef.limitToLast(12).on('child_changed', setMessage);
+    });
+
+    $scope.saveMessage = function() {
+        if(!$scope.messageText) {
+            return;
+        }
+
+    $scope.chatRef.push({
+        name: $scope.name,
+        text: $scope.messageText
+    }).then(function() {
+        $scope.messageText = "";
+            //This apply seems to be okay. Comment out if we're still getting errors.
+            $scope.$apply();
+        });
     }
+
 
 $scope.location = $location;
     // Gets groupId from the url
