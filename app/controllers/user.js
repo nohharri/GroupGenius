@@ -50,6 +50,8 @@ angular.module('myApp.controllers.user', ['ngAnimate'])
 		
 	};
 
+
+
 	$scope.approve = function(groupId, userId)
 	{
 		// add to members
@@ -76,10 +78,21 @@ angular.module('myApp.controllers.user', ['ngAnimate'])
 				userKey = memb;
 			count++;
 		}
+
+		//remove group from pageData
+		delete $scope.pageData[orgId][groupKey];
+		// handle last group in org
+		var groupCount = 0;
+		for (var key in $scope.pageData[orgId]) //because .length doesnt work
+			groupCount++;
+		if (groupCount == 0)
+			delete $scope.pageData[orgId];
+
+		// firebase
 		if (count <= 1) //only one member left, delete group
 				firebase.database().ref().child('/groups/' + groupId).remove();		
 		else
-			firebase.database().ref().child('/groups/' + groupId + '/members/' + userKey).remove();		
+			firebase.database().ref().child('/groups/' + groupId + '/members/' + userKey).remove();
 	}
 
 
