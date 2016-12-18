@@ -28,7 +28,7 @@
 				</a>
 				<br />
 				<div id="{{org}}Content" class="row">
-					<div id="wrapper-group-{{group.groupId}}" class="wrapper-group col-md-4 collapse in" ng-repeat="(groupKey, group) in groups">
+					<div id="wrapper-group-{{group.groupId}}" class="wrapper-group col-md-4 collapse in" ng-repeat="(groupKey, group) in groups" ng-hide="showGroup">
 
 						<center>
 							<div class="group-title-bar">
@@ -52,7 +52,7 @@
 									<span class="chev-notif glyphicon glyphicon-chevron-down"></span>
 								</div>
 								<div id="" class="wrapper-leaveBtn">
-									<button ng-click="leaveGroup(org, groupKey, group.groupId); showGroup = false">Leave group</button>
+									<button ng-click="leaveGroup(org, groupKey, group.groupId); showGroup = !showGroup">Leave group</button>
 								</div>
 							</div> <!-- END notification wrapper -->
 
