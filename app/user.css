@@ -43,7 +43,7 @@
 	padding-top: 10px; 
 	padding-bottom: 40px; 
 	box-shadow: 2px 2px 2px grey;
-	width: calc(33.33% - 50px) !important;
+	width: calc(50% - 50px) !important;
 }
 
 .quicklink { cursor: pointer; }
@@ -72,6 +72,14 @@
 	right: 0;
 	bottom: 0;
 }
+
+.group-notification-icon-small
+{
+	display: inline-block;
+	margin: 5px;
+}
+
+.group-notification-icon-small img{ height: 20px; }
 
 .ng-hide
 {

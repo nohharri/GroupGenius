@@ -61,11 +61,11 @@
 								<!-- ng-repeat for notifications -->
 								<div class="group-notification-detail well" ng-repeat="notif in notifications" ng-hide="showNotif">
 									<div class="group-notification-icon-small">
-										<img ng-src="static/img/icon-{{notif[0]}}.svg" style="height: 40px;"/>
+										<img ng-src="static/img/icon-{{notif[0]}}.svg"/>
 									</div>
-									{{ notif[1] }}<br /><br />
+									{{ notif[1] }}
 									<div ng-if="notif[0]=='joinRequest'">
-									<br />	<button ng-click="approve(group.groupId, notif[2]); showNotif = ! showNotif">Approve</button>
+										<button ng-click="approve(group.groupId, notif[2]); showNotif = ! showNotif">Approve</button>
 										<button ng-click="removeNotification(group.groupId, notif[2], notif[0]); showNotif = ! showNotif">Deny</button>
 									</div>
 									<button ng-if="notif[0] != 'joinRequest'" ng-click="removeNotification(group.groupId, notif[2], notif[0]); showNotif = ! showNotif">Dismiss</button>
