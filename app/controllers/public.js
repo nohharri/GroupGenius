@@ -92,10 +92,23 @@ angular.module('myApp.controllers.public', [])
 		return false;
 	}
 
-	$scope.updateGroup = function(groupId, name, desc, members, spots, comments, approval) {
+	$scope.updateGroup = function(groupId, name, desc, members, spots, comments, approval, noti) {
 		$scope.selected = true;
-
-
+		$scope.currPending = false;
+		if(noti != null && noti.joinRequest != null){
+			for(var key in noti.joinRequest){
+				if(key == firebase.auth().currentUser.uid){
+					$scope.currPending = true;
+				}
+			}
+		}		
+		$scope.currMember = false;
+		for(var c = 0; c < members.length; c++){
+			if(members[c] == $scope.userIDtoname[firebase.auth().currentUser.uid]){
+				$scope.currMember = true;
+				$scope.currPending = false;
+			}
+		}
 		$scope.groupId = groupId;
 		$scope.currentGroup = name;
 		$scope.currentMembers = $scope.formatMembers(members);
