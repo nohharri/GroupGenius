@@ -11,6 +11,9 @@ angular.module('myApp.controllers.public', [])
 		$scope.newDesc = "";
 		$scope.unlChecked = true;
 	}
+	$scope.isSelected = function(id){
+		if(id == $scope.currentGroup){ return true; } else { return false; }
+	}
 	$scope.userIDtoname = {};
 	$scope.nametoemail = {};
 	$scope.userIDtohash = {};

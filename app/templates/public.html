@@ -26,14 +26,14 @@ background-color: white;
 		<input type="text" class="form-control" id="search-input" placeholder="Search for groups..." autocomplete="off" style="width: 100%;display:inline-block;" ng-model="searchText">
 
 		<div style="margin: 10px; width: 95%; height: calc(100vh - 350px); overflow-y: auto;">
-			<ul class="list-group">
-			  <li ng-repeat="group in allGroups | filter:searchText" class="list-group-item" ng-click="updateGroup(group.groupId, group.name, group.desc, group.members, group.spots, group.comments, group.mustApprove, group.notifications);" ng-if="isActiveClass(group.org)">
+			<div class="list-group">
+			  <a ng-repeat="group in allGroups | filter:searchText" class="list-group-item" ng-click="updateGroup(group.groupId, group.name, group.desc, group.members, group.spots, group.comments, group.mustApprove, group.notifications);" ng-if="isActiveClass(group.org)">
 				
 			  	<h3 style="background-color: white">{{group.name}}</h3>
 			  	<p>{{formatMembers(group.members) | limitTo: 50}}{{formatMembers(group.members).length > 50 ? ' ...' : ''}}</p>
 			  	<p>{{group.desc | limitTo: 50}}{{group.desc.length > 20 ? ' ...' : ''}}</p>
-			  </li>
-			</ul>
+			  </a>
+			</div>
 		</div>
 
 <center>
@@ -86,7 +86,7 @@ background-color: white;
 					<p>{{comment.comment}}</b>
 				</div>
 			</div>
-			<div>
+			<form ng-submit="postCmt()">
 				<input type="text" ng-model="userComment"/>
 				<button type="button" class="warning" ng-click="postCmt()">Post</button>
 			</div>
