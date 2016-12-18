@@ -2,7 +2,7 @@
 angular.module('myApp.controllers.public', [])
 
 // Homepage controller
-.controller('PublicCtrl', function($scope, $rootScope, firebaseData, headerService, $http) {
+.controller('PublicCtrl', function($scope, $rootScope, firebaseData, headerService, $http, $location) {
   	$scope.allGroups = [];
 	$scope.selected = false;
     $scope.allGroupsRef = firebase.database().ref('groups');
@@ -110,28 +110,11 @@ angular.module('myApp.controllers.public', [])
 
 
 		$scope.currentClass = document.getElementById("orgSelect").value;
-		writeNewPost($scope.newName, $scope.newDesc, numSpots, document.getElementById("orgSelect").value, $("#approveCheckBox").val());
+		$scope.writeNewPost($scope.newName, $scope.newDesc, numSpots, document.getElementById("orgSelect").value, $("#approveCheckBox").val());
 
 	}
-    
-});
 
-
-
-/*
-
-/groups (list of groups)
-	/groupId (a certain group object)
-		/currentMembers (list of user objects)
-			/userID (a certain user object)
-				/name
-				
-
-
-
-*/
-
-function writeNewPost(name, desc, spots, org, mustApprove) {
+	$scope.writeNewPost = function(name, desc, spots, org, mustApprove) {
 
 	console.log("writing a new post");
 
@@ -161,12 +144,40 @@ function writeNewPost(name, desc, spots, org, mustApprove) {
   // Get a key for a new Post.
   var newPostKey = firebase.database().ref().child('groups').push().key;
 
+  // Create default chat
+  var chatRef = firebase.database().ref('/chat/' + newPostKey + '/' + 'General');
+  var keyName = chatRef.push({
+  	name: 'Chatbot',
+  	text: 'Welcome to the stream!'
+  });
+
   // Write the new post's data simultaneously in the posts list and the user's post list.
   var updates = {};
   newGroup['groupId'] = newPostKey; // update groupId
   //write the group to the group list
   updates['/groups/' + newPostKey] = newGroup;
  
-  return firebase.database().ref().update(updates);
+  firebase.database().ref().update(updates);
+
+  //window.location.href = '/app/#/private?groupId=' + newPostKey;
 }
+    
+});
+
+
+
+/*
+
+/groups (list of groups)
+	/groupId (a certain group object)
+		/currentMembers (list of user objects)
+			/userID (a certain user object)
+				/name
+				
+
+
+
+*/
+
+
 

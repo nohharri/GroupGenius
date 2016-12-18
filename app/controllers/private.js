@@ -8,6 +8,7 @@ angular.module('myApp.controllers.private', [])
     $scope.messages = [];
     $scope.messageText = "";
 
+
     $scope.groupId = 'KZ9a5HqDVn80zsXglLD';
 
     var firepadRef = firebaseData.database().ref();
@@ -18,7 +19,14 @@ angular.module('myApp.controllers.private', [])
         defaultText: 'Hello, World!'
     });
 
-    var chatRef = firebaseData.database().ref('/chat/');
+    var chatRef = firebaseData.database().ref('/chat/' + $scope.groupId + '/');
+
+ 
+/*
+    chatRef.push({
+        name: "Test name",
+        text: $scope.messageText
+    })*/
 
     firebaseData.provider().onAuthStateChanged(function(user) {
         chatRef.off();
