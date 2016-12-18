@@ -16,7 +16,8 @@ angular.module('myApp.controllers.public', [])
 	$scope.currEmails = [];
 	$scope.unlChecked = true;
 	$scope.groupId;
-
+	$scope.currPending = false;
+	$scope.currMember = false;
 	$scope.createUserHashMap = function(){
 		$http({
 			method: 'GET',
