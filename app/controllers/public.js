@@ -168,8 +168,7 @@ angular.module('myApp.controllers.public', [])
 		// Send join request if group is not open
 		if ($scope.currentGroup.mustApprove == "on")
 		{
-			var newKey = firebase.database().ref().child('groups/' +
-				 $scope.groupId + '/notifications/joinRequest').push().key;
+			var newKey = userId;
 			var updateNotif = {};
 			
 			updateNotif['/groups/' + $scope.groupId + '/notifications/joinRequest/' + newKey] = userId;
@@ -179,8 +178,7 @@ angular.module('myApp.controllers.public', [])
 		else // add and take to private group
 		{
 			var update = {};
-			var newKey = firebase.database().ref().child('groups/' +
-				 $scope.groupId + '/members/').push().key;
+			var newKey = userId;
 				
 			update['/groups/' + $scope.groupId + '/members/' + newKey] = userId;
 			firebase.database().ref().update(update);
