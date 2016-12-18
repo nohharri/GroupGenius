@@ -13,6 +13,7 @@ angular.module('myApp.controllers.public', [])
 	}
 	$scope.userIDtoname = {};
 	$scope.nametoemail = {};
+	$scope.userIDtohash = {};
 	$scope.currEmails = [];
 	$scope.unlChecked = true;
 	$scope.groupId;
@@ -24,15 +25,16 @@ angular.module('myApp.controllers.public', [])
 			url: 'https://groupgenius-5953b.firebaseio.com/users.json'
 		}).then(function successCallback(response) {
 			for(var key in response.data){
+				$scope.userIDtoname[response.data[key].uid] = key;
 				$scope.userIDtoname[response.data[key].uid] = response.data[key].firstName + " " + response.data[key].lastName;
 				$scope.nametoemail[response.data[key].firstName + " " + response.data[key].lastName] = response.data[key].email;
 			}
 			for(var c = 0; c < $scope.allGroups.length; c++){
-				for(var d= 0; d < $scope.allGroups[c].members.length; ++d){
-				
+				for(var d in $scope.allGroups[c].members){
 					$scope.allGroups[c].members[d] = $scope.userIDtoname[$scope.allGroups[c].members[d]];
 				}
 			}
+			console.log($scope.allGroups);
 		});
 	}
     //event listener that updates when groups are added to the database
@@ -103,7 +105,7 @@ angular.module('myApp.controllers.public', [])
 			}
 		}		
 		$scope.currMember = false;
-		for(var c = 0; c < members.length; c++){
+		for(var c in members){
 			if(members[c] == $scope.userIDtoname[firebase.auth().currentUser.uid]){
 				$scope.currMember = true;
 				$scope.currPending = false;
@@ -130,11 +132,13 @@ angular.module('myApp.controllers.public', [])
 	
 	$scope.formatMembers = function(members) {
 		var s = ' ';
-		for( var i = 0; i < members.length; ++i) {
+		var ij = Object.keys(members).length;
+		for( var i in members) {
 			s += members[i];
-			if( i < members.length - 1) {
+			if(ij > 1){
 				s += ", ";
 			}
+			ij--;
 		}
 		return s;
 	}
@@ -168,9 +172,9 @@ angular.module('myApp.controllers.public', [])
 
 		console.log("writing a new post");
 
-		var members = [];
+		var members = {};
 		//add the creator of the group to the members
-		members.push(firebase.auth().currentUser.uid);
+		members[$scope.userIDtohash[firebase.auth().currentUser.uid]] = firebase.auth().currentUser.uid;
 
 		// A post entry.
 		var newGroup = {
@@ -206,9 +210,9 @@ angular.module('myApp.controllers.public', [])
 
 	$scope.joinGroup = function() {
 		var userId = firebase.auth().currentUser.uid;
-
+		
 		// Send join request if group is not open
-		if ($scope.approvalSetting == "on")
+		if ($scope.approvalSetting == "on" && !$scope.currMember)
 		{
 			var newKey = userId;
 			var updateNotif = {};
