@@ -11,7 +11,7 @@ angular.module('myApp.controllers.private', [])
 
     $scope.groupId = 'KZ9a5HqDVn80zsXglLD';
 
-    var firepadRef = firebaseData.database().ref();
+    var firepadRef = firebaseData.database().ref('/docs/' + $scope.groupId + '/');
     var codeMirror = CodeMirror(document.getElementById('wrapper-document'), { lineWrapping: true });
     var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
         richTextShortcuts: true,
