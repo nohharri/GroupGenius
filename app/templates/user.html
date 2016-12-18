@@ -16,6 +16,7 @@
 			<a href="#/public"><button>Look for a group!</button></a>
 
 			<div>
+				<h4>Pending groups</h4>
 				<p ng-repeat="p in pendingGroups">{{ p.org }} - {{ p.name }}</p>
 			</div>
 			<div id="{{org}}" class="wrapper-organization" ng-repeat="(org, groups) in pageData">
@@ -27,25 +28,25 @@
 							<h3><a href="#/private?groupId={{group.groupId}}">{{group.name}}</a></h3>
 						</div>
 						<div id="" class="wrapper-group-notification row">
-							<div id="" class="group-notification col-md-4">
+							<div id="" class="group-notification col-md-4" ng-if="group.mustApprove == 'on'">
 								<div class="group-notification-icon"></div>
-								X new Balls
+									{{ parseNotifications(group.notifications.joinRequest).length}} new logistics
 							</div>
 							<div id="" class="group-notification col-md-4">
 								<div class="group-notification-icon"></div>
-								X new Balls
+									X new contributions
 							</div>
 							<div id="" class="group-notification col-md4">
-								<div class="group-notification-icon"></div>
-								X new Balls
+								<div class="group-notification-icon" ng-if="group.notifications.logistics"></div>
+									{{ parseNotifications(group.notifications.logistics).length}} new logistics
 							</div>
 
 							<span class="caret" data-target="#{{org}}-{{group.groupId}}-notifications" data-toggle="collapse"></span>
-							<div id="{{org}}-{{group.groupId}}-notifications" class="wrapper-group-notification-details collapse">
+							<div id="{{org}}-{{group.groupId}}-notifications" class="wrapper-group-notification-details collapse" ng-init="notifications = parseAllNotifications(group.notifications)">
 								<!-- ng-repeat for notifications -->
-								<div class="group-notification-detail" ng-repeat="(notifType, notifVal) in group.notifications">
+								<div class="group-notification-detail" ng-repeat="notif in notifications">
 									<div class="group-notification-icon-small"></div>
-									{{notifType}} - {{notifVal}}
+									{{ notif[0] }} - {{ notif[1] }}
 								</div>
 							</div> <!-- END expanded notifications -->
 
@@ -54,7 +55,7 @@
 				</div> <!-- END .row -->
 
 			</div> <!-- END .wrapper-organization -->
-
+			
 	
 	</div> <!-- END .row -->
 </div> <!-- END #wrapper-user -->

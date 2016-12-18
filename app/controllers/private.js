@@ -12,6 +12,9 @@ angular.module('myApp.controllers.private', [])
     $scope.chats = [];
     $scope.selected = null;
 
+    $scope.groupId = $location.search().groupId;
+    
+
     var firepadRef = firebaseData.database().ref('/docs/' + $scope.groupId + '/');
 
     // Get Group Data
@@ -30,7 +33,6 @@ angular.module('myApp.controllers.private', [])
 
 
     // Initialize chats
-    $scope.groupId = $location.search().groupId;
     console.log($scope.groupId);
     $scope.chatRef = firebaseData.database().ref('/chat/' + $scope.groupId + '/');
 
