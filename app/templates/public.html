@@ -68,9 +68,9 @@ background-color: white;
 		</center>
 		<hr />
 		<center>
-		<div style="background-color: orange" class="box" ng-show="currPending">
+		<button class="btn btn-warning" style="display: block; margin: auto; text-align: center; font-size: 20px; width: 60%; background-color: orange" ng-show="currPending">
 			Request Pending...
-		</div>
+		</button>
 		</center>
 		<button ng-hide="currPending" style="display: block;margin: auto; text-align: center; font-size: 20px; width: 60%" type="button" class="btn btn-success" ng-click="joinGroup()"><span ng-show="currMember">Go to Group Chat</span><span ng-hide="currMember">Join this Group</span></span></button>
 		<center><div ng-bind="openSpots" style="font-size: 11px; padding-top: 10px"></div></center>
