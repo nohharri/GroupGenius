@@ -37,7 +37,7 @@ angular.module('myApp.controllers.public', [])
     //event listener that updates when groups are added to the database
     $scope.allGroupsRef.on('value', function(snapshot) {
     	console.log("groups updated");
-    	console.log(snapshot.val());
+    	//console.log(snapshot.val());
     	var groupObj = snapshot.val();
 	$scope.allGroups = [];
     	for( var key in groupObj) {
@@ -61,6 +61,25 @@ angular.module('myApp.controllers.public', [])
 	$scope.getClasses();
 	$scope.currentClass = $scope.classes[0];
 	$scope.currentGroup = "Select a Group!"
+	$scope.currentComments = [];
+	
+	$scope.postCmt = function(){
+		if($scope.currentComments == null){
+			$scope.currentComments = [];
+		}
+		$scope.currentComments.push({"name": $scope.userIDtoname[firebase.auth().currentUser.uid], "user": firebase.auth().currentUser.uid, "comment": $scope.userComment});
+		// put to groups/id/comments.json
+		console.log('putting to' + 'https://groupgenius-5953b.firebaseio.com/groups/' + $scope.groupId + "/comments.json");
+		$scope.userComment = "";
+		$http({
+			method: 'PUT',
+			url: 'https://groupgenius-5953b.firebaseio.com/groups/' + $scope.groupId + "/comments.json",
+			data: $scope.currentComments
+			}).then(function successCallback(response){
+			console.log(response.data);
+		});
+		//console.log($scope.allGroups);
+	}
 
 	$scope.isActiveClass = function(clas){
 		if($scope.currentClass == clas) {
@@ -69,11 +88,12 @@ angular.module('myApp.controllers.public', [])
 		return false;
 	}
 
-	$scope.updateGroup = function(groupId, name, desc, members, spots) {
+	$scope.updateGroup = function(groupId, name, desc, members, spots, comments) {
 		$scope.selected = true;
 		$scope.currentGroup = name;
 		$scope.currentMembers = $scope.formatMembers(members);
-
+		$scope.currentComments = comments;
+		
 		if(spots == -1) {
 			$scope.openSpots = 'Open Spots: Unlimited';
 		} else {
