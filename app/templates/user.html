@@ -15,7 +15,9 @@
 		
 			<a href="#/public"><button>Look for a group!</button></a>
 
-	
+			<div>
+				<p ng-repeat="p in pendingGroups">{{ p.org }} - {{ p.name }}</p>
+			</div>
 			<div id="{{org}}" class="wrapper-organization" ng-repeat="(org, groups) in pageData">
 				<h2>{{org}}</h2>
 				<span class="caret" data-target="#{{org}}Content" data-toggle="collapse"></span>

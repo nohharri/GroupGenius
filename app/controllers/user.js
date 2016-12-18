@@ -20,7 +20,7 @@ angular.module('myApp.controllers.user', [])
 	$scope.getData = function()
 	{
 		$http.get('https://groupgenius-5953b.firebaseio.com/groups.json').success(function (response) {
-			var key, pageData = {};
+			var key, pageData = {}, pendingGroups =[];
 			var userId =  firebase.auth().currentUser.uid;
 			// Create object of orgs with array of groups for each org
 			for (key in response)
@@ -32,10 +32,23 @@ angular.module('myApp.controllers.user', [])
 						else // add first group to org
 							pageData[response[key].org] = [response[key]];
 				}
+				else // get groups that current user has requested to join
+				{
+					// if notification->joinRequest exits
+					if (response[key].notifications && response[key].notifications.joinRequest)
+					{
+						if (response[key].notifications.joinRequest[userId]) //user has requested to be in this group
+								pendingGroups.push(response[key]);
+						
+					}
+				}
 			}
 			console.log(pageData);
+			console.log(pendingGroups);
 			$scope.pageData = pageData;
+			$scope.pendingGroups = pendingGroups;
 		});
+		
 	};
 
 });
