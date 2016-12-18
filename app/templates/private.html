@@ -1,8 +1,6 @@
 <!-- Private Messaging Screen -->
 <div id="wrapper-private" class="private">
-	
-
-	<div id="group-info" ng-init="getGroupData()">
+	<div id="group-info">
 		<div id="group-name">
 			<h2>{{ groupInfo.name }}</h2>
 		</div>
@@ -16,11 +14,12 @@
 
 		</div>
 	</div> <!-- END #group-info -->
-
 	<div id="wrapper-content" class="">
 
 		<div id="wrapper-channel" class="col-md-4">
-			
+			<div ng-repeat="chat in chats">
+				{{ chat }}
+			</div>
 		</div> <!-- END #wrapper-channel -->
 
 		<div id="wrapper-chat" class="col-md-4 chatbox box">
@@ -40,7 +39,5 @@
 		<div id="wrapper-document" class="col-md-4">
 			document
 		</div><!-- END #wrapper-document -->
-
 	</div><!-- END #wrapper-content -->
-
 </div> <!-- END #wrapper-private -->
