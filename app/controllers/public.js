@@ -196,7 +196,7 @@ angular.module('myApp.controllers.public', [])
 			var newKey = userId;
 			var updateNotif = {};
 			
-			updateNotif['/groups/' + $scope.groupId + '/notifications/joinRequest/' + newKey] = userId;
+			updateNotif['/groups/' + $scope.groupId + '/notifications/joinRequest/' + newKey] = "User id: " + userId + " asked to join the group";
 			firebase.database().ref().update(updateNotif);
 		}
 
@@ -205,7 +205,7 @@ angular.module('myApp.controllers.public', [])
 			var update = {};
 			var newKey = userId;
 				
-			update['/groups/' + $scope.groupId + '/members/' + newKey] = userId;
+			update['/groups/' + $scope.groupId + '/members/' + newKey] = userId + " joined the group";
 			firebase.database().ref().update(update);
 			window.location.href = '/app/#/private?groupId=' + $scope.groupId;	
 		}
