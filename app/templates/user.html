@@ -8,14 +8,14 @@
 			</div>
 
 			<div id="" class="wrapper-quicklinks" ng-repeat="(orgs, groups) in pageData">
-				<span ng-click="scrollTo(orgs)">{{orgs}}</span>
+				<span class="quicklink" ng-click="scrollTo(orgs)">{{orgs}}</span>
 			</div>
 		</div>
 		<div id="wrapper-main" class="col-md-10">
 		
 			<a href="#/public"><button>Look for a group!</button></a>
 
-			<div>
+			<div ng-if="pendingGroups.length > 0">
 				<h4>Pending groups</h4>
 				<p ng-repeat="p in pendingGroups">{{ p.org }} - {{ p.name }}</p>
 			</div>
@@ -29,24 +29,26 @@
 						</div>
 						<div id="" class="wrapper-group-notification row">
 							<div id="" class="group-notification col-md-4" ng-if="group.mustApprove == 'on'">
-								<div class="group-notification-icon"></div>
-									{{ parseNotifications(group.notifications.joinRequest).length}} new logistics
+								<div class="group-notification-icon"><img src="static/img/icon-joinRequest.svg"/></div>
+									{{ parseNotifications(group.notifications.joinRequest).length }} new requests
 							</div>
-							<div id="" class="group-notification col-md-4">
-								<div class="group-notification-icon"></div>
-									X new contributions
+							<div id="" class="group-notification col-md4" ng-if="group.notifications.logistics">
+								<div class="group-notification-icon"><img src="static/img/icon-logistics.svg"/></div>
+									{{ parseNotifications(group.notifications.logistics).length }} new logistics
 							</div>
-							<div id="" class="group-notification col-md4">
-								<div class="group-notification-icon" ng-if="group.notifications.logistics"></div>
-									{{ parseNotifications(group.notifications.logistics).length}} new logistics
+							<div id="" class="group-notification col-md-4" ng-if="group.notifications.contributions">
+								<div class="group-notification-icon"><img src="static/img/icon-contribute.svg"/></div>
+									{{ parseNotifications(group.notifications.contributions).length }} new contributions
 							</div>
 
-							<span class="caret" data-target="#{{org}}-{{group.groupId}}-notifications" data-toggle="collapse"></span>
+							<span ng-if="group.notifications" class="caret" data-target="#{{org}}-{{group.groupId}}-notifications" data-toggle="collapse"></span>
 							<div id="{{org}}-{{group.groupId}}-notifications" class="wrapper-group-notification-details collapse" ng-init="notifications = parseAllNotifications(group.notifications)">
 								<!-- ng-repeat for notifications -->
 								<div class="group-notification-detail" ng-repeat="notif in notifications" ng-hide="showNotif">
-									<div class="group-notification-icon-small"></div>
-									{{ notif[0] }} - {{ notif[1] }}
+									<div class="group-notification-icon-small">
+										<img ng-src="static/img/icon-{{notif[0]}}.svg"/>
+									</div>
+									{{ notif[1] }}
 									<!--<div ng-if="notif[0]=='joinRequest'">-->
 									<button ng-click="approveOrDeny(group.groupId, notif[2], 'approve'); showNotif = ! showNotif">Approve</button>
 									<button ng-click="approveOrDeny(group.groupId, notif[2], 'deny'); showNotif = ! showNotif">Deny</button>
