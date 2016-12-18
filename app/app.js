@@ -12,7 +12,8 @@ angular.module('myApp', [
     'myApp.controllers.newgroup',
     'myApp.controllers.signup',
     'myApp.controllers.public',
-    'myApp.controllers.private'
+    'myApp.controllers.private',
+    'firebase'
     ])
 
 .config(['$routeProvider', function($routeProvider) {
@@ -56,6 +57,7 @@ angular.module('myApp', [
 
 // Global app controller
 .controller('appCtrl', function($scope, $rootScope, firebaseData, headerService) {
+
     $rootScope.isAuthenticated = true;
     $scope.showProfileSettings = false;
     $scope.headerUsername = "Guest"
