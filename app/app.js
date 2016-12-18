@@ -61,7 +61,7 @@ angular.module('myApp', [
     $rootScope.isAuthenticated = true;
     $scope.showProfileSettings = false;
     $scope.headerUsername = "Guest"
-    $rootScope.curUsername = "FUCKFIRE";
+    $rootScope.curUsername = "guest";
 
     firebaseData.provider().onAuthStateChanged(function(user) {
 
