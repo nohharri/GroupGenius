@@ -89,7 +89,7 @@ angular.module('myApp.controllers.user', [])
 			if (arr[key] == target)
 				return key;
 		}
-		return false;
+		return -1;
 	};
 });
 
