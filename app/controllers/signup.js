@@ -27,6 +27,8 @@ angular.module('myApp.controllers.signup', [])
 
 	$scope.signUp = function() {
 		//$scope.addUserToFirebase(this.firstName, this.last);
+		if($scope.user.firstName.length === 0 || $scope.user.lastName.length === 0) throw new Error('Name must be filled in');
+
 		firebaseData.provider()
 			.createUserWithEmailAndPassword($scope.user.email, $scope.user.password)
 			.then(function() {

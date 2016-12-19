@@ -2,15 +2,16 @@
 <div id="signup">
 	<div class="box">
 		<div ng-if="showSignUp">
+			<form>
 			<h2>Sign Up</h2>
 			<hr>
 			<div>
-				<input ng-model="user.firstName" id="firstName"
+				<input ng-model="user.firstName" id="firstName" required
 				type="text"
 				placeholder="First Name">
 			</div>
 			<div>
-				<input ng-model="user.lastName"
+				<input ng-model="user.lastName" required
 				type="text"
 				placeholder="Last Name">
 			</div>
@@ -24,7 +25,7 @@
 				type="password"
 				placeholder="Password">
 			</div>
-			<button class="btn btn-primary" ng-click="signUp()">Sign Up</button>
+			<button class="btn btn-primary" ng-click="signUp()">Sign Up</button></form>
 			<hr>
 			<button class="btn btn-facebook" ng-click="signUpWithFacebook()">Sign up with Facebook</button>
 			<p class="muted">Already a member? <span class="clickable" ng-click="toggleSignUp()" style="text-decoration: underline;">Log in.</span></p>
