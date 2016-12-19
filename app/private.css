@@ -54,7 +54,7 @@
 .firepad-userlist-color-indicator{
     width:5px;
     height:5px;
-    border: none;
+    border: 1px solid gray;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;

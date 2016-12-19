@@ -236,7 +236,7 @@ angular.module('myApp.controllers.public', [])
 			
 			update['/groups/' + $scope.groupId + '/notifications/logistics/' + userId] = username + " joined the group";
 			firebase.database().ref().update(update);
-			window.location.href = '/app/#/private?groupId=' + $scope.groupId;	
+			window.location.href = '/#/private?groupId=' + $scope.groupId;	
 		}
 	}
 
