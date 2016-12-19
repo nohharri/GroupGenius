@@ -131,6 +131,7 @@ angular.module('myApp.controllers.private', [])
         text: $scope.messageText
     }).then(function() {
         $scope.messageText = "";
+            $('#chat-area').scrollTop($('#chat-area').height());
             //This apply seems to be okay. Comment out if we're still getting errors.
             $scope.$apply();
         });
