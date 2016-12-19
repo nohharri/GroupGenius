@@ -126,7 +126,6 @@ angular.module('myApp.controllers.private', [])
         if(!$scope.messageText) {
             return;
         }
-
     $scope.chatRef.push({
         name: $scope.name,
         text: $scope.messageText

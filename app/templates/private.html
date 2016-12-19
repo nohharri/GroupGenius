@@ -16,17 +16,18 @@
 	</div> <!-- END #group-info -->
 	<div id="wrapper-content">
 		<div id="wrapper-chat" class="col-sm-4 chatbox box">
-			<div id="chat-area" class="chat-area">
+			<div id="chat-area" class="chat-area" style="padding-bottom: 30px">
 				<div ng-repeat="message in messages" class="chat-message">
 					<strong>{{ message.name }}:</strong>
 					<span>{{ message.text }} </span>
 				</div>
+				<div id="butts"></div>
 			</div>
 			<div class="message-box">
-				<hr>
-
+				<hr />
+				<form>
 				<input class="user-message" ng-model="messageText" type="text">
-				<button ng-click="saveMessage()" ng-keyup="$event.keyCode == 13 ? saveMessage() : null" class="btn btn-primary user-message-send">Send</button>
+				<button ng-click="saveMessage()" ng-keyup="$event.keyCode == 13 ? saveMessage() : null" class="btn btn-primary user-message-send">Send</button></form>
 			</div>
 		</div><!-- END #wrapper-chat -->
 
