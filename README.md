@@ -1,6 +1,6 @@
-# angular-firebase-bootstrap-seed — the seed for AngularJS Firebase Bootstrap apps
+# GroupGenius
 
-This project is a simple to understand structure of AngularJS that contains Firebase and Bootstrap. 
+This project is hosted at https://salty-spire-19854.herokuapp.com/#/landing
 
 
 ## Directory Layout
@@ -41,7 +41,7 @@ npm install
 npm start
 ```
 
-Now browse to the app at `http://localhost:8000/app/`.
+Now browse to the app at http://localhost:8000/app/ .
 
 ## Bootstrap Documentation
 
