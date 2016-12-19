@@ -70,10 +70,10 @@
 									</div>
 									{{ notif[1] }}<br />
 									<div ng-show="notif[0]=='joinRequest'">
-										<button class="btn btn-primary" ng-click="approve(group.groupId, notif[2]); notif = false;">Approve</button>
-										<button class="btn btn-danger" ng-click="removeNotification(group.groupId, notif[2], notif[0]); notif = false;">Deny</button>
+										<button class="btn btn-primary" ng-click="approve(org, groupKey, group.groupId, notif[2], notif[0]); notif = false;">Approve</button>
+										<button class="btn btn-danger" ng-click="removeNotification(org, groupKey, group.groupId, notif[2], notif[0]); notif = false;">Deny</button>
 									</div>
-									<button class="btn btn-primary" ng-show="notif[0] != 'joinRequest'" ng-click="removeNotification(group.groupId, notif[2], notif[0]); notif = false;">Dismiss</button>
+									<button class="btn btn-primary" ng-show="notif[0] != 'joinRequest'" ng-click="removeNotification(org, groupKey, group.groupId, notif[2], notif[0]); notif = false;">Dismiss</button>
 								</div>
 							</div> <!-- END expanded notifications -->
 

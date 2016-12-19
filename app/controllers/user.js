@@ -52,16 +52,18 @@ angular.module('myApp.controllers.user', ['ngAnimate'])
 
 
 
-	$scope.approve = function(groupId, userId)
+	$scope.approve = function(orgKey, groupKey, groupId, userId, type)
 	{
+		delete $scope.pageData[orgKey][groupKey]['notifications'][type][userId]; //update view
 		// add to members
 		firebase.database().ref().child('/groups/' + groupId + '/members').push(userId);
 		// remove from joinRequest
 		firebase.database().ref().child('/groups/' + groupId + '/notifications/joinRequest/' + userId).remove();
 	}
 
-	$scope.removeNotification = function(groupId, userId, type)
+	$scope.removeNotification = function(orgKey, groupKey, groupId, userId, type)
 	{
+		delete $scope.pageData[orgKey][groupKey]['notifications'][type][userId]; //update view
 		firebase.database().ref().child('/groups/' + groupId + '/notifications/' + type + '/' + userId).remove();
 	}
 
