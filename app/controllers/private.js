@@ -87,6 +87,7 @@ angular.module('myApp.controllers.private', [])
                             $scope.chatObjects[key].selected = false;
                             console.log($scope.chatObjects[key]);
                             $scope.chats.push($scope.chatObjects[key]);
+                            $('#chat-area').scrollTop($('#chat-area').height());
                         }
                     } 
                 }
