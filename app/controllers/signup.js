@@ -18,8 +18,12 @@ angular.module('myApp.controllers.signup', [])
 		email: "",
 		password: ""
 	};
-
 	$scope.showSignUp = true;
+
+
+	if($location.search().type) {
+		$scope.showSignUp = false;
+	}
 
 	$scope.signUp = function() {
 		//$scope.addUserToFirebase(this.firstName, this.last);
